@@ -7,48 +7,49 @@ using _Flawless.gamestates;
 
 namespace _Flawless
 {
-	class Program
-	{
-		static RenderWindow window;
-		static Stack<GameState> states = new Stack<GameState>();
+    class Program
+    {
+        public static RenderWindow window;
+        public static Stack<GameState> states = new Stack<GameState>();
 
-		static void Main(string[] args)
-		{
-			window = new RenderWindow(new VideoMode(1366, 768), "Window Title"/*, Styles.Fullscreen , new ContextSettings() {AntialiasingLevel = 16 }*/);
-		    window.Closed += (sender, e) =>{ var o = sender as Window; o?.Close(); Environment.Exit(0);};
+        static void Main(string[] args)
+        {
+            window = new RenderWindow(new VideoMode(1280, 720), "Window Title"/*, Styles.Fullscreen , new ContextSettings() {AntialiasingLevel = 16 }*/);
+            window.Closed += (sender, e) => { var o = sender as Window; o?.Close(); Environment.Exit(0); };
+            var text = new Text { Font = Resources.getFont("trebuc.ttf") };
 
-		    var text = new Text {Font = Resources.getFont("trebuc.ttf")};
+            // initialize GameTime
+            var clock = new Clock();
+            states.Push(new MenuState());
+            var time = 0f;
 
-		    // initialize GameTime
-			var clock = new Clock();
-			states.Push(new MainState());
+            while (states.Count > 0)
+            {
+                var deltaTime = clock.ElapsedTime.AsSeconds();
+                time += deltaTime;
+                clock.Restart();
+                //text.DisplayedString = time.ToString();
 
-			while (states.Count > 0)
-			{
-				var deltaTime = clock.ElapsedTime.AsSeconds();
-				clock.Restart();
-				text.DisplayedString = deltaTime.ToString();
+                // update
+                var current = states.Peek();
+                current.Update(deltaTime);
 
-				GameState current = states.Peek();
-				current.Update(deltaTime);
-				// draw
-				window.Clear(new Color(100, 149, 237));
+                // draw
+                window.Clear(new Color(100, 149, 237));
+                current.Draw(window);
 
-                
+                window.Draw(text); //display deltaTime in seconds
+                window.Display();
 
-				current.Draw(window);
-				//window.Draw(text); //display deltaTime in seconds
-				window.Display();
-
-                if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
-                    states.Push(new PauseState());
                 window.DispatchEvents();
 
-				// handle states
-				if (current.IsFinished) states.Pop();
-				if (current.NewState != null) states.Push(current.NewState);
-			}
-		}
+                // handle states
+                if (current.IsFinished) states.Pop();
+                if (current.NewState != null){ states.Push(current.NewState);
+                    current.NewState = null;
+                }
+            }
+        }
 
-	}
+    }
 }

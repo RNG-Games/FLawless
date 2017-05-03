@@ -9,6 +9,6 @@ namespace _Flawless.gamestates
 
 
 		public bool IsFinished { get; protected set; }
-		public GameState NewState { get; private set; }
+		public GameState NewState { get; set; }
 	}
 }
