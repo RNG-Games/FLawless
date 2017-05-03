@@ -14,12 +14,11 @@ namespace _Flawless.gamestates
         //private Player _player;
         private List<IActable> actors = new List<IActable>();
         private float escPause = 2f;
-        private float time = 0;
+        private float time = 0f;
 
         public PlayState() : this("")
         {
-            IEnemy enemy1 = EnemyFactory.GetEnemy("A");
-            actors.Add(enemy1);
+            actors.Add(EnemyFactory.GetEnemy("A"));
         }
 
         public PlayState(string StagePath)
@@ -29,6 +28,7 @@ namespace _Flawless.gamestates
 
         public override void Draw(RenderWindow _window)
         {
+            _window.Clear(new Color(100,100,100));
             foreach (var act in actors.Where(a => a.StartTime() <= time))
             {
                 act.Draw(_window);
@@ -46,6 +46,7 @@ namespace _Flawless.gamestates
             {
                 act.Update(_deltaTime);
             }
+
             if (escPause <= 0f && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
                 Program.states.Push(new PauseState());

@@ -19,14 +19,13 @@ namespace _Flawless.actors
 
         public Player()
         {
-            position = new Vector2f(100, 100);
+            position = new Vector2f(200, 100);
             texture = new Sprite(Resources.GetTexture("player.png")) {Position = position};
             speed = 0.2f;
         }
 
         public void Draw(RenderWindow _window)
         {
-            _window.Clear(new Color(100,100,100));
             _window.Draw(texture);
         }
 

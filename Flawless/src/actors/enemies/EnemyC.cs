@@ -16,7 +16,6 @@ namespace _Flawless.actors.enemies
 
         public void Draw(RenderWindow _window)
         {
-            _window.Clear(new Color(100, 100, 100));
             _window.Draw(texture);
         }
 
