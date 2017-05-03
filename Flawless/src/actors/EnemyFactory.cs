@@ -9,12 +9,8 @@ namespace _Flawless.actors
 {
     class EnemyFactory
     {
-        public Enemy GetEnemy(String enemyType)
+        public IEnemy GetEnemy(String enemyType)
         {
-            if(enemyType == null)
-            {
-                return null;
-            }
             if(enemyType == "A")
             {
                 return new EnemyA();
@@ -27,6 +23,7 @@ namespace _Flawless.actors
             {
                 return new EnemyC();
             }
+            return null;
         }
     }
 }
