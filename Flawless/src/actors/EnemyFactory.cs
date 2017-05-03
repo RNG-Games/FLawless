@@ -7,9 +7,9 @@ using _Flawless.actors.enemies;
 
 namespace _Flawless.actors
 {
-    class EnemyFactory
+    static class EnemyFactory
     {
-        public IEnemy GetEnemy(String enemyType)
+        public static IEnemy GetEnemy(String enemyType)
         {
             if(enemyType == "A")
             {

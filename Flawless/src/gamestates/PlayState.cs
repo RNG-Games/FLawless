@@ -18,7 +18,8 @@ namespace _Flawless.gamestates
 
         public PlayState() : this("")
         {
-            
+            IEnemy enemy1 = EnemyFactory.GetEnemy("A");
+            actors.Add(enemy1);
         }
 
         public PlayState(string StagePath)
