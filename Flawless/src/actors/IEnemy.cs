@@ -7,7 +7,7 @@ using SFML.System;
 
 namespace _Flawless.actors
 {
-    interface IEnemy
+    interface IEnemy : IActable
     {
         Vector2f GetPosition();
         void SetPosition(float x, float y);
