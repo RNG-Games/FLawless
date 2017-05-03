@@ -8,10 +8,10 @@ using SFML.System;
 
 namespace _Flawless.actors.enemies
 {
-    class EnemyA : IEnemy, IActable
+    class EnemyA : IEnemy
     {
         private Vector2f position;
-        private Sprite texture;
+        private Sprite texture = new Sprite(Resources.GetTexture("player.png"));
         public EnemyA() {}
 
         public void Draw(RenderWindow _window)

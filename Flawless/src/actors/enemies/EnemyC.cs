@@ -8,7 +8,7 @@ using SFML.System;
 
 namespace _Flawless.actors.enemies
 {
-    class EnemyC : IEnemy, IActable
+    class EnemyC : IEnemy
     {
         private Vector2f position;
         private Sprite texture;
