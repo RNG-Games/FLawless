@@ -6,32 +6,42 @@ using System.Threading.Tasks;
 using SFML.Graphics;
 using SFML.Window;
 using _Flawless.actors;
-using _Flawless;
 
 namespace _Flawless.gamestates
 {
     class PlayState : GameState
     {
-        private Player _player;
-
+        //private Player _player;
+        private List<IActable> actors = new List<IActable>();
         private float escPause = 2f;
+        private float time = 0;
 
         public PlayState() : this(""){ }
 
         public PlayState(string StagePath)
         {
-            _player = Resources.GetPlayer();
+            actors.Add(Resources.GetPlayer());
         }
 
         public override void Draw(RenderWindow _window)
         {
-            _player.Draw(_window);
+            foreach (var act in actors.Where(a => a.StartTime() <= time))
+            {
+                act.Draw(_window);
+            }
+          
         }
 
         public override void Update(float _deltaTime)
         {
             escPause -= _deltaTime;
-            _player.Update(_deltaTime);
+            time += _deltaTime;
+
+            actors = actors.Where(n => !n.IsExpired()).ToList();
+            foreach (var act in actors.Where(a => a.StartTime() <= time))
+            {
+                act.Update(_deltaTime);
+            }
             if (escPause <= 0f && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
                 Program.states.Push(new PauseState());

@@ -10,7 +10,7 @@ using _Flawless.util;
 
 namespace _Flawless.actors
 {
-    class Player
+    class Player : IActable
     {
         private Sprite texture;
         private Circle hitbox;
@@ -43,11 +43,29 @@ namespace _Flawless.actors
                 move.X += speed;
 
             //TODO: Bewegungseinschränkungen
+            if (position.X <= 0 && move.X < 0)
+                move.X = 0;
+            if (position.X + texture.Texture.Size.X >= Program.window.Size.X && move.X > 0)
+                move.X = 0;
+            if (position.Y <= 0 && move.Y < 0)
+                move.Y = 0;
+            if (position.Y + texture.Texture.Size.Y >= Program.window.Size.Y && move.Y > 0)
+                move.Y = 0;
 
             position += move;
 
             texture.Position = position;
             //hitbox.setPosition(position.X,position.Y);
+        }
+
+        public float StartTime()
+        {
+            return 0f;
+        }
+
+        public bool IsExpired()
+        {
+            return false;
         }
     }
 }

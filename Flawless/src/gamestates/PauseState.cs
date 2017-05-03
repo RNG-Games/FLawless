@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using System;
+using SFML.Graphics;
 using SFML.Window;
 
 namespace _Flawless.gamestates
@@ -19,10 +20,9 @@ namespace _Flawless.gamestates
             if (!Keyboard.IsKeyPressed(Keyboard.Key.Escape))
                 escPressed = false;
 
-            text.DisplayedString = "Pause \n\n\nPress Esc to go back";
+            text.DisplayedString = "Pause \n\n\nPress \"Esc\" to go back";
             if (!escPressed && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
                 this.IsFinished = true;
-                
         }
     }
 }
