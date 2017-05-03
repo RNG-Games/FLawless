@@ -16,7 +16,10 @@ namespace _Flawless.gamestates
         private float escPause = 2f;
         private float time = 0;
 
-        public PlayState() : this(""){ }
+        public PlayState() : this("")
+        {
+            
+        }
 
         public PlayState(string StagePath)
         {

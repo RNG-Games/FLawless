@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SFML.System;
 
-namespace _Flawless.src.actors
+namespace _Flawless.actors
 {
-    interface Enemy
+    interface IEnemy
     {
         Vector2f GetPosition();
         void SetPosition(float x, float y);

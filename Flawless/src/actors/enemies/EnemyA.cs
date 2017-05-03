@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _Flawless.src.actors.enemies
+namespace _Flawless.actors.enemies
 {
-    class EnemyA : Enemy
+    class EnemyA : IEnemy
     {
         public EnemyA()
         {}

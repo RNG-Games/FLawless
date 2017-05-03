@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _Flawless.actors.enemies;
 
-namespace _Flawless.src.actors
+namespace _Flawless.actors
 {
     class EnemyFactory
     {
