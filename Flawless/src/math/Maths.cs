@@ -12,7 +12,6 @@ namespace _Flawless.src.math
         /// <summary>
         /// Erzeugt verwendbare Koordinaten für den Positionsvektor
         /// </summary>
-        /// <param name="position">referenzierte Position (wird verändert)</param>
         /// <param name="spawnPosition">Rotationszentrum</param>
         /// <param name="angle">Winkel</param>
         /// <param name="radius">Radius</param>
