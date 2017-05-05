@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SFML.Graphics;
 using SFML.Window;
+using SFML.System;
 using _Flawless.actors;
 
 namespace _Flawless.gamestates
@@ -18,7 +19,8 @@ namespace _Flawless.gamestates
 
         public PlayState() : this("")
         {
-            actors.Add(EnemyFactory.GetEnemy("A"));
+            actors.Add(EnemyFactory.GetEnemy("A",100,100));
+            actors.Add(EnemyFactory.GetEnemy("A",200,200));
         }
 
         public PlayState(string StagePath)

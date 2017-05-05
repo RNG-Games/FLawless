@@ -8,59 +8,24 @@ using SFML.System;
 
 namespace _Flawless.actors.enemies
 {
-    class EnemyA : IEnemy
+    class EnemyA : Enemy
     {
-        private Vector2f position;
-        private Sprite texture = new Sprite(Resources.GetTexture("player.png"));
-        public EnemyA() {}
-
-        public void Draw(RenderWindow _window)
-        {
-            _window.Draw(texture);
+        public EnemyA(Vector2f position) : base(position) {
+            texture = new Sprite(Resources.GetTexture("player.png")) { Position = position };
         }
 
-        public Vector2f GetPosition() { return position;  }
-
-        public bool IsExpired()
+        public override void Update(float _deltaTime)
         {
-            return false;
-        }
-
-        public void KillEnemy()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ResetEnemy()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetPosition(float x, float y)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetPosition(int x, int y) { position = new Vector2f(x, y); }
-
-        public void SetStartTime(float time)
-        {
-            throw new NotImplementedException();
-        }
-
-        public float StartTime()
-        {
-            return 0f;
-        }
-
-        public void TakeControl()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(float _deltaTime)
-        {
-            
+            base.Update(_deltaTime);
+            if (frameCounter % 10000 < 5000)
+            {
+                position.X += 0.1f;
+            }
+            else
+            {
+                position.X -= 0.1f;
+            }
+            texture.Position = position;
         }
     }
 }
