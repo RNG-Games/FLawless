@@ -19,13 +19,8 @@ namespace _Flawless.gamestates
 
         public PlayState() : this("")
         {
-<<<<<<< HEAD
             actors.Add(EnemyFactory.GetEnemy("A",100,100));
             actors.Add(EnemyFactory.GetEnemy("A",200,200));
-=======
-            actors.Add(Resources.GetPlayer());
-            actors.Add(EnemyFactory.GetEnemy("A"));
->>>>>>> origin/master
         }
 
         public PlayState(string StagePath)
