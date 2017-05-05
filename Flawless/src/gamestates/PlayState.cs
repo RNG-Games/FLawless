@@ -19,13 +19,18 @@ namespace _Flawless.gamestates
 
         public PlayState() : this("")
         {
+<<<<<<< HEAD
             actors.Add(EnemyFactory.GetEnemy("A",100,100));
             actors.Add(EnemyFactory.GetEnemy("A",200,200));
+=======
+            actors.Add(Resources.GetPlayer());
+            actors.Add(EnemyFactory.GetEnemy("A"));
+>>>>>>> origin/master
         }
 
         public PlayState(string StagePath)
         {
-            actors.Add(Resources.GetPlayer());
+            
         }
 
         public override void Draw(RenderWindow _window)
@@ -43,7 +48,7 @@ namespace _Flawless.gamestates
             escPause -= _deltaTime;
             time += _deltaTime;
 
-            actors = actors.Where(n => !n.IsExpired()).ToList();
+            actors = actors.Where(a => !a.IsExpired()).ToList();
             foreach (var act in actors.Where(a => a.StartTime() <= time))
             {
                 act.Update(_deltaTime);
