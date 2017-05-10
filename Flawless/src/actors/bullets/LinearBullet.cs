@@ -24,6 +24,7 @@ namespace _Flawless.actors.bullets
             base.Update(_deltaTime);
             Vector2f coord = Maths.toPolar(spawnPosition, position);
             coord.X += speed * _deltaTime;
+            position = Maths.toCartesian(spawnPosition, coord.Y, coord.X);
             texture.Position = position;
         }
     }
