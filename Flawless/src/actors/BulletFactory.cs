@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SFML.System;
+using _Flawless.actors.bullets;
 
 namespace _Flawless.actors
 {
@@ -13,7 +14,7 @@ namespace _Flawless.actors
         {
             if(type == Bullet.BulletType.A)
             {
-                return new BulletA(position, angle);
+                return new LinearBullet(position, angle);
             }
             return null;
         }
