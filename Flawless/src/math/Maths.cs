@@ -38,11 +38,24 @@ namespace _Flawless.math
             {
                 this.value = value;
             }
+            public static Angle operator +(Angle a, Angle b)
+            {
+                return new Angle((a.value + b.value) % 360);
+            }
+            public static Angle operator -(Angle a)
+            {
+                return new Angle(-a.value);
+            }
+            public static Angle operator -(Angle a, Angle b)
+            {
+                Angle result = a + (-b);
+                result.value += 360;  //erhöhe winkel um 360 , um ggf negativität zu verhindern
+                result.value %= 360;
+                return result;
+            }
+
         }
-        public static Angle operator+(Angle a, Angle b)
-        {
-            return new Angle((a.value + b.value) % 360);
-        }
+        
     }
 }
 
