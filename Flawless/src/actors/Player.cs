@@ -31,7 +31,6 @@ namespace _Flawless.actors
 
         public void Draw(RenderWindow _window)
         {
-            
             foreach (var pb in bullets)
             {
                pb.Draw(_window);
