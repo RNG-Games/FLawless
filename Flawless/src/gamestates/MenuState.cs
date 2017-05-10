@@ -26,7 +26,7 @@ namespace _Flawless.gamestates
 
         public override void Update(float _deltaTime)
         {
-            text.DisplayedString = "Menu \n\n\nPress \"A\" to Test \n\nPress \"Esc\" to Exit";
+            text.DisplayedString = "Menu \n\n\nPress \"A\" to Test \n\nPress \"Esc\" to Exit \n\n Press \"Space\" to fire ingame";
             //cursor.Position = new Vector2f(Mouse.GetPosition().X, Mouse.GetPosition().Y);
             if (Keyboard.IsKeyPressed(Keyboard.Key.A))
                 this.NewState = new PlayState();

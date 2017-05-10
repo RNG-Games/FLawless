@@ -19,6 +19,8 @@ namespace _Flawless.gamestates
 
         public PlayState() : this("")
         {
+            actors.Add(Resources.GetPlayer());
+            Resources.GetPlayer().position = new Vector2f(Program.window.Size.X / 2.0f, 500);
             actors.Add(EnemyFactory.GetEnemy("A",100,100));
             actors.Add(EnemyFactory.GetEnemy("A",200,200));
         }
