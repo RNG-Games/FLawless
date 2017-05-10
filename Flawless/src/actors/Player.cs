@@ -25,7 +25,7 @@ namespace _Flawless.actors
         {
             position = new Vector2f(200, 100);
             texture = new Sprite(Resources.GetTexture("player.png")) {Position = position};
-            speed = 0.2f;
+            speed = 300f;
             hitbox = new Circle(position, texture.Texture.Size.X);
         }
 
@@ -46,13 +46,13 @@ namespace _Flawless.actors
             firecounter = (firecounter + _deltaTime)%float.MaxValue;
             var move = new Vector2f(0,0);
             if (Keyboard.IsKeyPressed(Keyboard.Key.W))
-                move.Y -= speed;
+                move.Y -= speed * _deltaTime;
             if (Keyboard.IsKeyPressed(Keyboard.Key.S))
-                move.Y += speed;
+                move.Y += speed * _deltaTime;
             if (Keyboard.IsKeyPressed(Keyboard.Key.A))
-                move.X -= speed;
+                move.X -= speed * _deltaTime;
             if (Keyboard.IsKeyPressed(Keyboard.Key.D))
-                move.X += speed;
+                move.X += speed * _deltaTime;
 
             //TODO: Bewegungseinschränkungen
             if (position.X <= 0 && move.X < 0)
@@ -75,15 +75,15 @@ namespace _Flawless.actors
                 pb.Update(_deltaTime);
             }
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && firecounter >= 0.15f && energy >= 0.05f)
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && firecounter >= 0.15f && energy >= 0.01f)
             {
                 fire();
                 firecounter = 0f;
-                energy -= 0.05f;
+                energy -= 0.01f;
             }
             else if(firecounter >= 0.2f)
             {
-                energy += _deltaTime/50f;
+                energy += _deltaTime/33f;
             }
             if (energy > 1f)
                 energy = 1f;
