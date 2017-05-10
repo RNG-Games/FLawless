@@ -71,10 +71,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\actors\Bullet.cs" />
+    <Compile Include="src\actors\BulletFactory.cs" />
+    <Compile Include="src\actors\bullets\BulletA.cs" />
     <Compile Include="src\actors\enemies\EnemyA.cs" />
     <Compile Include="src\actors\Enemy.cs" />
     <Compile Include="src\actors\EnemyFactory.cs" />
     <Compile Include="src\actors\IActable.cs" />
+    <Compile Include="src\actors\Pattern.cs" />
+    <Compile Include="src\actors\patterns\PatternA.cs" />
     <Compile Include="src\actors\Player.cs" />
     <Compile Include="src\actors\PlayerBullet.cs" />
     <Compile Include="src\gamestates\GameState.cs" />
