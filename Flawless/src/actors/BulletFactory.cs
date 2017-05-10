@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SFML.System;
+using _Flawless.actors.bullets;
 
 namespace _Flawless.actors
 {
