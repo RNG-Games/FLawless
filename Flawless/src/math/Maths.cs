@@ -30,6 +30,19 @@ namespace _Flawless.math
             if ( position.Y < spawnPosition.Y) { angle = 360 - angle; }    //if the positon is below the spwan, the angle is "spun" around the x axis
             return new Vector2f(radius, angle);
         }
+
+        public struct Angle
+        {
+            public float value { get; set; }
+            public Angle(float value)
+            {
+                this.value = value;
+            }
+        }
+        public static Angle operator+(Angle a, Angle b)
+        {
+            return new Angle((a.value + b.value) % 360);
+        }
     }
 }
 
