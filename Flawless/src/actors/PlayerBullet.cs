@@ -19,7 +19,7 @@ namespace _Flawless.actors
         public PlayerBullet(Vector2f position)
         {
             this.position = position;
-            this.speed = new Vector2f(0,-0.3f);
+            this.speed = new Vector2f(0,-600f);
             texture = new Sprite(Resources.GetTexture("pbullet.png")) {Position = position};
             hitbox = new Circle(new Vector2f(position.X + texture.Texture.Size.X/2f, position.Y + texture.Texture.Size.Y/2f), texture.Texture.Size.X/2f);
         }
@@ -41,7 +41,7 @@ namespace _Flawless.actors
         /// <param name="_deltaTime"></param>
         public void Update(float _deltaTime)
         {
-            position += speed;
+            position += speed * _deltaTime;
             texture.Position = position;
             hitbox.setPosition(hitbox.middle + speed);
             if (position.X < -5f || position.Y < -5)

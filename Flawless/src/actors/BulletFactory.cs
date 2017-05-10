@@ -14,7 +14,7 @@ namespace _Flawless.actors
         {
             if(type == Bullet.BulletType.A)
             {
-                return new BulletA(position, angle);
+                return new LinearBullet(position, angle);
             }
             return null;
         }

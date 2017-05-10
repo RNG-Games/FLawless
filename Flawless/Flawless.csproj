@@ -73,7 +73,7 @@
   <ItemGroup>
     <Compile Include="src\actors\Bullet.cs" />
     <Compile Include="src\actors\BulletFactory.cs" />
-    <Compile Include="src\actors\bullets\BulletA.cs" />
+    <Compile Include="src\actors\bullets\LinearBullet.cs" />
     <Compile Include="src\actors\enemies\EnemyA.cs" />
     <Compile Include="src\actors\Enemy.cs" />
     <Compile Include="src\actors\EnemyFactory.cs" />

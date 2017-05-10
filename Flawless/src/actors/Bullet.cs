@@ -19,12 +19,12 @@ namespace _Flawless.actors
             count
         }
 
-        private Sprite texture;
-        private Circle hitbox;
-        private Vector2f spawnPosition;
+        protected Sprite texture;
+        protected Circle hitbox;
+        protected Vector2f spawnPosition;
         public Vector2f position;
-        private float speed;
-        private float angle;
+        protected float speed;
+        protected float angle;
 
         public Bullet(Vector2f _position, float _angle)
         {
@@ -48,9 +48,9 @@ namespace _Flawless.actors
             throw new NotImplementedException();
         }
 
-        public void Update(float _deltaTime)
+        public virtual void Update(float _deltaTime)
         {
-            throw new NotImplementedException();
+            texture.Position = position;
         }
 
     }
