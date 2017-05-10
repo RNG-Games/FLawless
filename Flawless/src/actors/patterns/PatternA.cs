@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SFML.System;
+using static _Flawless.math.Maths;
 
 namespace _Flawless.actors.patterns
 {
@@ -13,11 +14,11 @@ namespace _Flawless.actors.patterns
         protected Bullet.BulletType type;
         protected List<Bullet> bulletList;
         protected BulletFactory factory = new BulletFactory();
-        protected float angle;
+        protected Angle angle;
         protected Vector2f position;
-        protected float angleChange;
+        protected Angle angleChange;
 
-        public PolarPattern(int bulletNum, Bullet.BulletType type, Vector2f position, float angle, float angleChange)
+        public PolarPattern(int bulletNum, Bullet.BulletType type, Vector2f position, Angle angle, Angle angleChange)
         {
             this.bulletNum = bulletNum;
             this.type = type;
@@ -40,12 +41,13 @@ namespace _Flawless.actors.patterns
 
     class PPBurst : PolarPattern
     {
-        public PPBurst(int bulletNum, Bullet.BulletType type, Vector2f position, float angle, float angleChange) 
+        public PPBurst(int bulletNum, Bullet.BulletType type, Vector2f position, Angle angle, Angle angleChange) 
             : base(bulletNum, type, position, angle, angleChange)
         {
             for (int i = 0; i < bulletNum; i++)
             {
                 bulletList.Add(factory.GetBullet(type, position, angle));
+                angle += angleChange;
             }
         }
 
@@ -62,7 +64,7 @@ namespace _Flawless.actors.patterns
         private float timeCounter = 0;
         private float interval;
 
-        public PPInterval(int bulletNum, Bullet.BulletType type, Vector2f position, float angle, float angleChange, float interval)
+        public PPInterval(int bulletNum, Bullet.BulletType type, Vector2f position, Angle angle, Angle angleChange, float interval)
             : base(bulletNum, type, position, angle, angleChange)
         {
             this.interval = interval;
@@ -75,6 +77,7 @@ namespace _Flawless.actors.patterns
                 for (int i = 0; i < bulletNum; i++)
                 {
                     bulletList.Add(factory.GetBullet(type, position, angle));
+                    angle += angleChange;
                 }
             }
 
