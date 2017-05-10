@@ -13,12 +13,14 @@ namespace _Flawless.actors.patterns
         protected Bullet.BulletType type;
         protected List<Bullet> bulletList;
         protected BulletFactory factory = new BulletFactory();
-        protected int angle;
+        protected float angle;
         protected Vector2f position;
 
-        public PolarPattern(int bulletNum, Bullet.BulletType type, Vector2f position)
+        public PolarPattern(int bulletNum, Bullet.BulletType type, Vector2f position, float angle)
         {
-
+            this.bulletNum = bulletNum;
+            this.type = type;
+            this.position = position;
         }
     }
 
@@ -26,7 +28,7 @@ namespace _Flawless.actors.patterns
     {
         int angleChange;
 
-        public PPBurst(int bulletNum, Bullet.BulletType type, Vector2f position, ) {
+        public PPBurst(int bulletNum, Bullet.BulletType type, Vector2f position) {
             this.bulletNum = bulletNum;
             this.type = type;
         }
