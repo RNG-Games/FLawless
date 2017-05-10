@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SFML.System;
 using _Flawless.actors.bullets;
-using static _Flawless.math.Maths;
+using _Flawless.math;
 
 namespace _Flawless.actors
 {

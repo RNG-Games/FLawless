@@ -7,6 +7,28 @@ using SFML.System;
 
 namespace _Flawless.math
 {
+    public struct Angle
+    {
+        public float Value { get; set; }
+        public Angle(float value)
+        {
+            this.Value = value;
+        }
+        public static Angle operator +(Angle a, Angle b)
+        {
+            return new Angle((a.Value + b.Value) % 360);
+        }
+        public static Angle operator -(Angle a)
+        {
+            return new Angle(-a.Value);
+        }
+        public static Angle operator -(Angle a, Angle b)
+        {
+            return new Angle(System.Math.Abs((a + (-b)).Value));
+        }
+
+    }
+
     class Maths
     {
         /// <summary>
@@ -29,31 +51,6 @@ namespace _Flawless.math
             var angle = (float) Math.Acos(position.X - spawnPosition.X / radius);
             if ( position.Y < spawnPosition.Y) { angle = 360 - angle; }    //if the positon is below the spwan, the angle is "spun" around the x axis
             return new Vector2f(radius, angle);
-        }
-
-        public struct Angle
-        {
-            public float value { get; set; }
-            public Angle(float value)
-            {
-                this.value = value;
-            }
-            public static Angle operator +(Angle a, Angle b)
-            {
-                return new Angle((a.value + b.value) % 360);
-            }
-            public static Angle operator -(Angle a)
-            {
-                return new Angle(-a.value);
-            }
-            public static Angle operator -(Angle a, Angle b)
-            {
-                Angle result = a + (-b);
-                result.value += 360;  //erhöhe winkel um 360 , um ggf negativität zu verhindern
-                result.value %= 360;
-                return result;
-            }
-
         }
         
     }

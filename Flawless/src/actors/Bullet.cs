@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SFML.System;
 using SFML.Graphics;
 using _Flawless.util;
-using static _Flawless.math.Maths;
+using _Flawless.math;
 
 namespace _Flawless.actors
 {

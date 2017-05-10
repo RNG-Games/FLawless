@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using SFML.System;
 using SFML.Graphics;
 using _Flawless.math;
-using static _Flawless.math.Maths;
 
 namespace _Flawless.actors.bullets
 {
