@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SFML.System;
 using SFML.Graphics;
 using _Flawless.math;
+using static _Flawless.math.Maths;
 
 namespace _Flawless.actors.bullets
 {
@@ -13,7 +14,7 @@ namespace _Flawless.actors.bullets
     {
         Vector2f movement;
 
-        public LinearBullet(Vector2f _position, float _angle) : base(_position, _angle)
+        public LinearBullet(Vector2f _position, Angle _angle) : base(_position, _angle)
         {
             texture = new Sprite(Resources.GetTexture("player.png")) { Position = position };
             speed = 40f;

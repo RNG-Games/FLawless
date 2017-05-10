@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SFML.System;
 using SFML.Graphics;
 using _Flawless.util;
+using static _Flawless.math.Maths;
 
 namespace _Flawless.actors
 {
@@ -24,9 +25,9 @@ namespace _Flawless.actors
         protected Vector2f spawnPosition;
         public Vector2f position;
         protected float speed;
-        protected float angle;
+        protected Angle angle;
 
-        public Bullet(Vector2f _position, float _angle)
+        public Bullet(Vector2f _position, Angle _angle)
         {
             position = _position;
             spawnPosition = _position;
