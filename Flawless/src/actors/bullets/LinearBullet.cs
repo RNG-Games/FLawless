@@ -11,8 +11,6 @@ namespace _Flawless.actors.bullets
 {
     class LinearBullet : Bullet
     {
-        Vector2f movement;
-
         public LinearBullet(Vector2f _position, Angle _angle) : base(_position, _angle)
         {
             texture = new Sprite(Resources.GetTexture("player.png")) { Position = position };

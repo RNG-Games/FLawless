@@ -17,6 +17,12 @@ namespace _Flawless.actors.enemies
             test = new PPBurst(10, Bullet.BulletType.A, position, new math.Angle(0f), new math.Angle(1f));
         }
 
+        public override void Draw(RenderWindow _window)
+        {
+            base.Draw(_window);
+            test.Draw(_window);
+        }
+
         public override void Update(float _deltaTime)
         {
 

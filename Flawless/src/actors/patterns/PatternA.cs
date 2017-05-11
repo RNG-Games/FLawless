@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SFML.System;
 using _Flawless.math;
+using SFML.Graphics;
 
 namespace _Flawless.actors.patterns
 {
@@ -50,6 +51,15 @@ namespace _Flawless.actors.patterns
             {
                 bulletList.Add(factory.GetBullet(type, position, angle));
                 angle += angleChange;
+            }
+        }
+
+        public override void Draw(RenderWindow _window)
+        {
+            base.Draw(_window);
+            foreach (var bullet in bulletList)
+            {
+                bullet.Draw(_window);
             }
         }
 

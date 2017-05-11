@@ -19,7 +19,7 @@ namespace _Flawless.actors
             this.position = position;
         }
 
-        public void Draw(RenderWindow _window)
+        public virtual void Draw(RenderWindow _window)
         {
             _window.Draw(texture);
         }

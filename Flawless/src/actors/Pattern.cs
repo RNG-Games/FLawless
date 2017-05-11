@@ -9,7 +9,7 @@ namespace _Flawless.actors
 {
     abstract class Pattern : IActable
     {
-        public void Draw(RenderWindow _window) {}
+        public virtual void Draw(RenderWindow _window) {}
 
         public bool IsExpired()
         {
