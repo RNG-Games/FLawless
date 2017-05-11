@@ -14,7 +14,7 @@ namespace _Flawless.actors.bullets
         public LinearBullet(Vector2f _position, Angle _angle) : base(_position, _angle)
         {
             texture = new Sprite(Resources.GetTexture("player.png")) { Position = position };
-            speed = 40f;
+            speed = 500f;
         }
 
         public override void Update(float _deltaTime)

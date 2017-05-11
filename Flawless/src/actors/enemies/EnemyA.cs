@@ -14,7 +14,7 @@ namespace _Flawless.actors.enemies
         PolarPattern test;
         public EnemyA(Vector2f position) : base(position) {
             texture = new Sprite(Resources.GetTexture("player.png")) { Position = position };
-            test = new PPBurst(10, Bullet.BulletType.A, position, new math.Angle(0f), new math.Angle(1f));
+            test = new PPBurst(45, Bullet.BulletType.A, position, new math.Angle(0f), new math.Angle(8f));
         }
 
         public override void Draw(RenderWindow _window)
