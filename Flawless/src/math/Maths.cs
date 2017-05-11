@@ -24,7 +24,7 @@ namespace _Flawless.math
         }
         public static Angle operator -(Angle a, Angle b)
         {
-            return new Angle((a + -b).Value%360 + 360);
+            return new Angle(((a + -b).Value%360 + 360)%360);
         }
 
     }
