@@ -13,7 +13,7 @@ namespace _Flawless.actors.patterns
         protected int bulletNum;
         protected Bullet.BulletType type;
         protected List<Bullet> bulletList;
-        protected BulletFactory factory = new BulletFactory();
+        protected BulletFactory factory;
         protected Angle angle;
         protected Vector2f position;
         protected Angle angleChange;
@@ -26,6 +26,8 @@ namespace _Flawless.actors.patterns
             this.angle = angle;
             this.position = position;
             this.angleChange = angleChange;
+            factory = new BulletFactory();
+            bulletList = new List<Bullet>();
         }
 
         protected virtual void updateBullets(float _deltaTime)
