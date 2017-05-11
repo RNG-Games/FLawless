@@ -26,12 +26,14 @@ namespace _Flawless.actors
         public Vector2f position;
         protected float speed;
         protected Angle angle;
+        protected float radius;
 
         public Bullet(Vector2f _position, Angle _angle)
         {
             position = _position;
             spawnPosition = _position;
             angle = _angle;
+            radius = 0;
         }
 
         public void Draw(RenderWindow _window)

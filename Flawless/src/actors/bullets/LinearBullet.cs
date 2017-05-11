@@ -22,9 +22,8 @@ namespace _Flawless.actors.bullets
         public override void Update(float _deltaTime)
         {
             base.Update(_deltaTime);
-            Vector2f coord = Maths.toPolar(spawnPosition, position);
-            coord.X += speed * _deltaTime;
-            position = Maths.toCartesian(spawnPosition, coord.Y, coord.X);
+            radius += speed * _deltaTime;
+            position = Maths.toCartesian(spawnPosition, angle.Value, radius);
             texture.Position = position;
         }
     }
