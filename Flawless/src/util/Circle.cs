@@ -35,6 +35,16 @@ namespace _Flawless.util
         {
             this.middle = middle;
         }
+
+        public void addToPosition(float x, float y)
+        {
+            this.middle += new Vector2f(x,y);
+        }
+
+        public void addToPostion(Vector2f move)
+        {
+            this.middle += move;
+        }
         public bool intersectsWith(Circle c)
         {
             var distancePow2 = (c.middle.X - this.middle.X) * (c.middle.X - this.middle.X) + (c.middle.Y - this.middle.Y) * (c.middle.Y - this.middle.Y);

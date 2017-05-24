@@ -7,6 +7,7 @@ using SFML.System;
 using SFML.Graphics;
 using _Flawless.util;
 using _Flawless.math;
+using _Flawless;
 
 namespace _Flawless.actors
 {
@@ -27,6 +28,8 @@ namespace _Flawless.actors
         protected float speed;
         protected Angle angle;
         protected float radius;
+        protected float damage;
+        protected bool expiration;
 
         public Bullet(Vector2f _position, Angle _angle)
         {
@@ -34,6 +37,7 @@ namespace _Flawless.actors
             spawnPosition = _position;
             angle = _angle;
             radius = 0;
+            expiration = false;
         }
 
         public void Draw(RenderWindow _window)
@@ -43,7 +47,7 @@ namespace _Flawless.actors
 
         public bool IsExpired()
         {
-            throw new NotImplementedException();
+            return expiration;
         }
 
         public float StartTime()
@@ -56,5 +60,21 @@ namespace _Flawless.actors
             texture.Position = position;
         }
 
+        protected void CheckCollision()
+        {
+            if (!Resources.GetPlayer().IntersectsWith(this.hitbox) || expiration) return;
+            expiration = true;
+            Resources.GetPlayer().DoDamage(damage);
+        }
+
+        protected virtual void CheckLocation()
+        {
+            if (hitbox.middle.X + hitbox.radius < -(hitbox.radius * 3) || hitbox.middle.X - hitbox.radius > 
+                Program.window.Size.X + (hitbox.radius * 3))
+                expiration = true;
+            if (hitbox.middle.Y + hitbox.radius < -(hitbox.radius * 3) || hitbox.middle.Y - hitbox.radius >
+                Program.window.Size.Y + (hitbox.radius * 3))
+                expiration = true;
+        }
     }
 }

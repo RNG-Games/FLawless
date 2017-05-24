@@ -33,6 +33,7 @@ namespace _Flawless.actors.patterns
 
         protected virtual void updateBullets(float _deltaTime)
         {
+            bulletList = bulletList.Where(b => !b.IsExpired()).ToList();
             foreach (var current in bulletList)
             {
                 current.Update(_deltaTime);
@@ -86,7 +87,7 @@ namespace _Flawless.actors.patterns
         {
             if (!isSpawned && (timeCounter >= interval))
             {
-                for (int i = 0; i < bulletNum; i++)
+                for (var i = 0; i < bulletNum; i++)
                 {
                     bulletList.Add(factory.GetBullet(type, position, angle));
                     angle += angleChange;

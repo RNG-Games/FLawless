@@ -20,7 +20,6 @@ namespace _Flawless.gamestates
         public PlayState() : this("")
         {
             actors.Add(Resources.GetPlayer());
-            Resources.GetPlayer().position = new Vector2f(Program.window.Size.X / 2.0f, 500);
             actors.Add(EnemyFactory.GetEnemy("A", 100, 100));
             actors.Add(EnemyFactory.GetEnemy("A", 200, 200));
             actors.Add(EnemyFactory.GetEnemy("A", 300, 300));
@@ -33,7 +32,7 @@ namespace _Flawless.gamestates
 
         public override void Draw(RenderWindow _window)
         {
-            _window.Clear(new Color(100,100,100));
+            _window.Clear(new Color(255,255,255));
             foreach (var act in actors.Where(a => a.StartTime() <= time))
             {
                 act.Draw(_window);
