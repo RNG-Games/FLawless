@@ -12,6 +12,7 @@ namespace _Flawless.actors
     {
         protected Vector2f position;
         protected Sprite texture;
+        protected Queue<Pattern> patternQueue = new Queue<Pattern>();
         protected int frameCounter;
 
         public Enemy(Vector2f position)

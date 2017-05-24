@@ -8,33 +8,32 @@ using SFML.Graphics;
 namespace _Flawless.actors
 {
     /// <summary>
-    /// Benötigt für alle Actors
+    /// Required by actors
     /// </summary>
     interface IActable
     {
         /// <summary>
-        /// Alles zeichnen, was mit dem Ding zu tun hat
+        /// Drawing Stuff
         /// </summary>
-        /// <param name="_window">RenderWindow in das gezeichnet wird</param>
+        /// <param name="_window">RenderWindow in which is drawn</param>
         void Draw(RenderWindow _window);
 
         /// <summary>
-        /// Update die Daten
+        /// Update the actor
         /// </summary>
         /// <param name="_deltaTime"></param>
         void Update(float _deltaTime);
 
         /// <summary>
-        /// Zeit ab der der Actor geupdated/verwaltet wird
+        /// Starting time at which the update of the actor can start
         /// </summary>
-        /// <returns>Startzeit in Sekunden</returns>
+        /// <returns>Starting time in seconds</returns>
         float StartTime();
 
         /// <summary>
-        /// Damit Actors aus der verwalteten Liste genommen werden können
-        /// true - wird nicht mehr genutzt
+        /// Useful for removing from List
         /// </summary>
-        /// <returns>Wahrheitswert ob noch genutzt</returns>
+        /// <returns>bool - true if it can be removed</returns>
         bool IsExpired();
     }
 }

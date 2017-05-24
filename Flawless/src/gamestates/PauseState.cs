@@ -6,7 +6,7 @@ namespace _Flawless.gamestates
 {
     class PauseState : GameState
     {
-        private Text text = new Text { Font = Resources.getFont("trebuc.ttf") };
+        private Text text = new Text { Font = Resources.GetFont("trebuc.ttf") };
         private bool escPressed = true;
 
         public override void Draw(RenderWindow _window)

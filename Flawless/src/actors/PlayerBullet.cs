@@ -18,27 +18,19 @@ namespace _Flawless.actors
 
         public PlayerBullet(Vector2f position)
         {
-            this.position = position;
             this.speed = new Vector2f(0,-600f);
-            texture = new Sprite(Resources.GetTexture("pbullet.png")) {Position = position};
-            hitbox = new Circle(new Vector2f(position.X + texture.Texture.Size.X/2f, position.Y + texture.Texture.Size.Y/2f), texture.Texture.Size.X/2f);
+            texture = new Sprite(Resources.GetTexture("pbullet.png"));
+            this.position = position - new Vector2f(texture.Texture.Size.X/2f, 0);
+            hitbox = new Circle(position, texture.Texture.Size.X/2f);
+            texture.Position = position;
         }
         private bool expired = false;
-        /// <summary>
-        /// Alles zeichnen, was mit dem Ding zu tun hat
-        /// </summary>
-        /// <param name="_window">RenderWindow in das gezeichnet wird</param>
+
         public void Draw(RenderWindow _window)
         {
             _window.Draw(texture);
-
-
         }
 
-        /// <summary>
-        /// Update die Daten
-        /// </summary>
-        /// <param name="_deltaTime"></param>
         public void Update(float _deltaTime)
         {
             position += speed * _deltaTime;
@@ -50,20 +42,11 @@ namespace _Flawless.actors
                 expired = true;
         }
 
-        /// <summary>
-        /// Zeit ab der der Actor geupdated/verwaltet wird
-        /// </summary>
-        /// <returns>Startzeit in Sekunden</returns>
         public float StartTime()
         {
             return 0f;
         }
 
-        /// <summary>
-        /// Damit Actors aus der verwalteten Liste genommen werden können
-        /// true - wird nicht mehr genutzt
-        /// </summary>
-        /// <returns>Wahrheitswert ob noch genutzt</returns>
         public bool IsExpired()
         {
             return expired;
