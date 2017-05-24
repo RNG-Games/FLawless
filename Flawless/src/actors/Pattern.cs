@@ -4,16 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SFML.Graphics;
+using SFML.System;
 
 namespace _Flawless.actors
 {
     abstract class Pattern : IActable
     {
+        protected int bulletNum;
+        protected Bullet.BulletType type;
+        protected List<Bullet> bulletList;
+        protected BulletFactory factory;
+        protected Vector2f position;
         public virtual void Draw(RenderWindow _window) {}
+
+        public int GetBulletNum() { return bulletNum; }
+        public Bullet.BulletType GetBulletType() { return type; }
+        public List<Bullet> GetBulletList() { return bulletList; }
+        public Vector2f GetPosition() { return position; }
+        public virtual Pattern GetCopy(Vector2f position) { return null; }
+
 
         public bool IsExpired()
         {
-            return false;
+            if (bulletList.Any<Bullet>()) return false;
+            return true;
         }
 
         public float StartTime()
