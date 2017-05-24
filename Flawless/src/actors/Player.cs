@@ -20,7 +20,7 @@ namespace _Flawless.actors
         private float firecounter = 0.2f;
         private float eRegenCounter = 0.5f;
         private float energy = 1f;
-        private Text text = new Text("", Resources.getFont("trebuc.ttf"));
+        private Text text = new Text("", Resources.GetFont("trebuc.ttf"));
         private float protection = 0f;
 
         public Player()
@@ -61,7 +61,7 @@ namespace _Flawless.actors
             if (Keyboard.IsKeyPressed(Keyboard.Key.D))
                 move.X += speed * _deltaTime;
 
-            //TODO: Bewegungseinschränkungen
+            //TODO: Bewegungseinschränkungen mit Overlay
             if (hitbox.middle.X - hitbox.radius <= 0 && move.X < 0)
                 move.X = 0;
             if (hitbox.middle.X + hitbox.radius >= Program.window.Size.X && move.X > 0)
@@ -98,7 +98,7 @@ namespace _Flawless.actors
 
         private void fire()
         {
-            bullets.Add(new PlayerBullet(position));
+            bullets.Add(new PlayerBullet(hitbox.middle));
         }
         public float StartTime()
         {

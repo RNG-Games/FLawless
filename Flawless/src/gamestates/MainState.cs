@@ -10,7 +10,7 @@ namespace _Flawless.gamestates
 		Sprite testSprite = new Sprite(Resources.GetTexture("pixel.png"));
 	    private Vertex[] line = {new Vertex(new Vector2f(50, 50)), new Vertex(new Vector2f(100,100)) };
 	    private float _time = 0;
-        Text text = new Text(){ Font = new Font(Resources.getFont("trebuc.ttf"))};
+        Text text = new Text(){ Font = new Font(Resources.GetFont("trebuc.ttf"))};
 	    public override void Draw(RenderWindow _window)
 		{
 		    text.DisplayedString = "Nothing to see here (for now)";

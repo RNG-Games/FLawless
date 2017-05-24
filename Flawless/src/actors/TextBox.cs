@@ -11,36 +11,43 @@ namespace _Flawless.actors
     abstract class TextBox : IActable
     {
         protected Text text; //full text
-        protected String currentDisplayed; 
-        protected Sprite texture;
+        protected String currentDisplayed;
+        protected Sprite texture = new Sprite(Resources.GetTexture("")); //Textbox namen hier einfügen
+        protected Sprite portrait;
         protected Vector2f position;
-        protected Font font; // maybe redundant, seemed practical to have here for the unprofessional eye of mine tho
+        protected Boolean expiration;
 
-        public TextBox (Vector2f _position)
+        public TextBox(Vector2f _position, String _text, String _font, String _portrait)
         {
+            text = new Text("", Resources.GetFont(_font));
             position = _position;
+            expiration = false;
+            portrait = new Sprite(Resources.GetTexture(_portrait));
         }
 
         public void Draw(RenderWindow _window)
         {
             _window.Draw(texture);
+            _window.Draw(portrait);
             _window.Draw(text);
         }
 
         public bool IsExpired()
         {
-            throw new NotImplementedException();
+            return expiration;
         }
 
         public float StartTime()
         {
-            throw new NotImplementedException();
+            return 0; //vorläufig zur exeption vermeidung
         }
 
         public virtual void Update(float _deltaTime)
         {
             text.DisplayedString = currentDisplayed;
-
+            texture.Position = position;  //Für mögliche Animationen am Konversationsanfang, ggf überflüssig
+            text.Position = position;  //muss später noch versetzt werden um die breite des portraits
+            portrait.Position = position; //portraits der Charaktere hängen jetzt vorerst in der oberen linken ecke
         }
     }
 }

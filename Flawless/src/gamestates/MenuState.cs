@@ -12,7 +12,7 @@ namespace _Flawless.gamestates
     class MenuState : GameState
     {
         //Sprite cursor = new Sprite(Resources.GetTexture("pixel.png"));
-        Text text = new Text(){Font = Resources.getFont("trebuc.ttf") };
+        Text text = new Text(){Font = Resources.GetFont("trebuc.ttf") };
 
         public override void Draw(RenderWindow _window)
         {

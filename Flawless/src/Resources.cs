@@ -20,7 +20,7 @@ namespace _Flawless
 			return textures[textureName];
 		}
 
-		public static Font getFont(string name)
+		public static Font GetFont(string name)
 		{
 			if (!fonts.ContainsKey(name))
 			{
