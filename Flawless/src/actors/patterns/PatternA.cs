@@ -11,13 +11,11 @@ namespace _Flawless.actors.patterns
 {
     abstract class PolarPattern : Pattern
     {
-        protected int bulletNum;
-        protected Bullet.BulletType type;
-        protected List<Bullet> bulletList;
-        protected BulletFactory factory;
         protected Angle angle;
-        protected Vector2f position;
         protected Angle angleChange;
+
+        public Angle GetAngle() { return angle; }
+        public Angle GetAngleChange() { return angleChange; }
 
         public PolarPattern(int bulletNum, Bullet.BulletType type, Vector2f position, Angle angle, Angle angleChange)
         {
@@ -53,6 +51,11 @@ namespace _Flawless.actors.patterns
                 bulletList.Add(factory.GetBullet(type, position, angle));
                 angle += angleChange;
             }
+        }
+
+        public override Pattern GetCopy(Vector2f position)
+        {
+            return new PPBurst(this.GetBulletNum(), this.GetBulletType(), position, this.GetAngle(), this.GetAngleChange());
         }
 
         public override void Draw(RenderWindow _window)

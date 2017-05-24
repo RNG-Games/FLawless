@@ -14,7 +14,8 @@ namespace _Flawless.actors.enemies
         PolarPattern test;
         public EnemyA(Vector2f position) : base(position) {
             texture = new Sprite(Resources.GetTexture("player.png")) { Position = position };
-            test = new PPBurst(45, Bullet.BulletType.A, position, new math.Angle(0f), new math.Angle(8f));
+            patternQueue.Enqueue(new PPBurst(45, Bullet.BulletType.A, position, new math.Angle(0f), new math.Angle(8f)));
+            test = (PolarPattern)patternQueue.Peek();
         }
 
         public override void Draw(RenderWindow _window)
@@ -30,11 +31,15 @@ namespace _Flawless.actors.enemies
             if (frameCounter % 10000 < 5000)
             {
                 position.X += 0.1f;
+
             }
             else
             {
                 position.X -= 0.1f;
             }
+
+            if (test.IsExpired()) test = (PolarPattern) (patternQueue.Peek()).GetCopy(position);
+
             texture.Position = position;
             test.Update(_deltaTime);
         }
