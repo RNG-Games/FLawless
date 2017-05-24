@@ -17,6 +17,14 @@ namespace _Flawless.actors
             {
                 return new LinearBullet(position, angle);
             }
+            if(type == Bullet.BulletType.B)
+            {
+                return new PolarBullet(position, angle);
+            }
+            if(type == Bullet.BulletType.C)
+            {
+                return new WaveyBullet(position, angle);
+            }
             return null;
         }
     }

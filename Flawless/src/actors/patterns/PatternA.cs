@@ -42,7 +42,6 @@ namespace _Flawless.actors.patterns
     }
 
     /* Constant Polar Pattern */
-
     class PPBurst : PolarPattern
     {
         public PPBurst(int bulletNum, Bullet.BulletType type, Vector2f position, Angle angle, Angle angleChange) 

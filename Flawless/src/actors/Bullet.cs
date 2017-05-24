@@ -18,6 +18,7 @@ namespace _Flawless.actors
         {
             A,
             B,
+            C,
             count
         }
 
@@ -52,7 +53,7 @@ namespace _Flawless.actors
 
         public float StartTime()
         {
-            throw new NotImplementedException();
+            return 0f;
         }
 
         public virtual void Update(float _deltaTime)
