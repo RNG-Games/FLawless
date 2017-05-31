@@ -49,9 +49,10 @@ namespace _Flawless.actors
         public virtual void Update(float _deltaTime)
         {
             frameCounter += _deltaTime;
-            if (frameCounter > 0.2 && toDisplay.Length > 0)
+            if (frameCounter > 0.1 && toDisplay.Length > 0)
             {
                 text.DisplayedString += toDisplay.ElementAt(0);
+                if (text.DisplayedString.Length % 20 == 0) { text.DisplayedString += '\n'; }
                 toDisplay = toDisplay.Substring(1);  //adjust toDisplay
                 frameCounter = 0;
             }
