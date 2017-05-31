@@ -19,7 +19,10 @@ namespace _Flawless.actors
 
         public TextBox(Vector2f _position, String _text, String _font, String _portrait)
         {
-            text = new Text("", Resources.GetFont(_font));
+            text = new Text(_text, Resources.GetFont(_font));
+            text.Color = new Color(0, 0, 0);
+            //only for testing
+            currentDisplayed = _text;
             position = _position;
             expiration = false;
             portrait = new Sprite(Resources.GetTexture(_portrait));
@@ -42,11 +45,12 @@ namespace _Flawless.actors
             return 0; //vorläufig zur exeption vermeidung
         }
 
+
         public virtual void Update(float _deltaTime)
         {
             text.DisplayedString = currentDisplayed;
             texture.Position = position;  //Für mögliche Animationen am Konversationsanfang, ggf überflüssig
-            text.Position = position;  //muss später noch versetzt werden um die breite des portraits
+            text.Position = new Vector2f (position.X + 100, position.Y + 10);  //muss später noch versetzt werden um die breite des portraits
             portrait.Position = position; //portraits der Charaktere hängen jetzt vorerst in der oberen linken ecke
         }
     }
