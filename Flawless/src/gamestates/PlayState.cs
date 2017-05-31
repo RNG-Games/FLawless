@@ -19,17 +19,12 @@ namespace _Flawless.gamestates
 
         public PlayState() : this("")
         {
-            actors.Add(Resources.GetPlayer());
-            actors.Add(EnemyFactory.GetEnemy("A", 100, 100));
-            actors.Add(EnemyFactory.GetEnemy("A", 200, 200));
-            actors.Add(EnemyFactory.GetEnemy("A", 300, 300));
-            actors.Add(new TextBox(new Vector2f(400, 525), "langer test: bluuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuub", "trebuc.ttf", "TestPortrait.png"));
-            
+            util.Loader.LoadFromFile("content\\stages\\Test.bin", actors);
         }
 
         public PlayState(string StagePath)
         {
-            
+            actors.Add(Resources.GetPlayer());
         }
 
         public override void Draw(RenderWindow _window)

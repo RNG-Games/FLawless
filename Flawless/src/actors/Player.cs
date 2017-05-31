@@ -22,6 +22,7 @@ namespace _Flawless.actors
         private float energy = 1f;
         private Text text = new Text("", Resources.GetFont("trebuc.ttf"));
         private float protection = 0f;
+        private bool dying = false;
 
         public Player()
         {
@@ -42,10 +43,20 @@ namespace _Flawless.actors
             text.Position = new Vector2f(10,10);
             text.Color = new Color(0,0,0);
             _window.Draw(text);
+
+            if (dying)
+            {
+                
+            }
         }
 
         public void Update(float _deltaTime)
         {
+            if (dying)
+            {
+                
+                return;
+            }
             firecounter += _deltaTime;
             if (firecounter >= float.MaxValue - 15f) firecounter = 2f;
             eRegenCounter += _deltaTime;
@@ -125,8 +136,9 @@ namespace _Flawless.actors
             if (energy <= 0)
             {
                 energy = 0f;
-                //doDeath
+                dying = true;
             }
         }
+
     }
 }

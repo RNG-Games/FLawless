@@ -8,6 +8,7 @@ using SFML.Graphics;
 
 namespace _Flawless.actors
 {
+    //ID Bytes: 0000 0010 = 02 = 2
     public class TextBox : IActable
     {
         protected Text text; 

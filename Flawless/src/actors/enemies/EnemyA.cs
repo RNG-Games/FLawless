@@ -9,6 +9,8 @@ using _Flawless.actors.patterns;
 
 namespace _Flawless.actors.enemies
 {
+
+    //ID Bytes: 1010 1010 = AA = 170
     class EnemyA : Enemy
     {
         PolarPattern test;

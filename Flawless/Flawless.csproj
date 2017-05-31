@@ -95,10 +95,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Resources.cs" />
     <Compile Include="src\util\Circle.cs" />
+    <Compile Include="src\util\Loader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="content\font\trebuc.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="content\stages\Test.bin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

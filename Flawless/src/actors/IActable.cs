@@ -10,7 +10,7 @@ namespace _Flawless.actors
     /// <summary>
     /// Required by actors
     /// </summary>
-    interface IActable
+    public interface IActable
     {
         /// <summary>
         /// Drawing Stuff
