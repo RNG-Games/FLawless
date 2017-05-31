@@ -51,8 +51,8 @@ namespace _Flawless.actors
             frameCounter += _deltaTime;
             if (frameCounter > 0.2 && toDisplay.Length > 0)
             {
-                text.DisplayedString = text.DisplayedString + toDisplay.ElementAt(0);
-                toDisplay.Remove(1, 1);  //adjust toDisplay
+                text.DisplayedString += toDisplay.ElementAt(0);
+                toDisplay = toDisplay.Substring(1);  //adjust toDisplay
                 frameCounter = 0;
             }
             texture.Position = position;  //Für mögliche Animationen am Konversationsanfang, ggf überflüssig
