@@ -8,11 +8,11 @@ using SFML.Graphics;
 
 namespace _Flawless.actors
 {
-    abstract class TextBox : IActable
+    public class TextBox : IActable
     {
         protected Text text; //full text
         protected String currentDisplayed;
-        protected Sprite texture = new Sprite(Resources.GetTexture("")); //Textbox namen hier einfügen
+        protected Sprite texture = new Sprite(Resources.GetTexture("TestTB.png")); 
         protected Sprite portrait;
         protected Vector2f position;
         protected Boolean expiration;

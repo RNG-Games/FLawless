@@ -23,6 +23,8 @@ namespace _Flawless.gamestates
             actors.Add(EnemyFactory.GetEnemy("A", 100, 100));
             actors.Add(EnemyFactory.GetEnemy("A", 200, 200));
             actors.Add(EnemyFactory.GetEnemy("A", 300, 300));
+            actors.Add(new TextBox(new Vector2f(400, 525), "test", "trebuc.ttf", "TestPortrait.png"));
+            
         }
 
         public PlayState(string StagePath)
