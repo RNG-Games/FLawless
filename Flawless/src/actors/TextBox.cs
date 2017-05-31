@@ -56,6 +56,7 @@ namespace _Flawless.actors
                 toDisplay = toDisplay.Substring(1);  //adjust toDisplay
                 frameCounter = 0;
             }
+            else if (frameCounter > 2) { expiration = true; } //After the full Text is displayed and 5 seconds(?) passed, textbox closes
             texture.Position = position;  //Für mögliche Animationen am Konversationsanfang, ggf überflüssig
             text.Position = new Vector2f (position.X + 100, position.Y + 20);  
             portrait.Position = new Vector2f(position.X + -25, position.Y -25); //portraits der Charaktere hängen jetzt vorerst in der oberen linken ecke
