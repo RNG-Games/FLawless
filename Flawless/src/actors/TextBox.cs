@@ -50,17 +50,19 @@ namespace _Flawless.actors
         public virtual void Update(float _deltaTime)
         {
             frameCounter += _deltaTime;
-            if (frameCounter > 0.1 && toDisplay.Length > 0)
+            if (frameCounter > 0.1 && toDisplay.Length > 0)  //slowly display the text
             {
                 text.DisplayedString += toDisplay.ElementAt(0);
                 if (text.DisplayedString.Length % 20 == 0) { text.DisplayedString += '\n'; }
                 toDisplay = toDisplay.Substring(1);  //adjust toDisplay
                 frameCounter = 0;
             }
-            else if (frameCounter > 2) { expiration = true; } //After the full Text is displayed and 5 seconds(?) passed, textbox closes
-            texture.Position = position;  //Für mögliche Animationen am Konversationsanfang, ggf überflüssig
+            texture.Position = position; 
             text.Position = new Vector2f (position.X + 100, position.Y + 20);  
             portrait.Position = new Vector2f(position.X + -25, position.Y -25); //portraits der Charaktere hängen jetzt vorerst in der oberen linken ecke
+
+            if (frameCounter > 1.5) { position = new Vector2f(position.X, position.Y + (float)0.2); } //Despawn animation
+            if (frameCounter > 2) { expiration = true; } //After the full Text is displayed and 2 seconds(?) passed, textbox closes
         }
     }
 }
