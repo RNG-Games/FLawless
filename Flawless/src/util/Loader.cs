@@ -13,12 +13,11 @@ namespace _Flawless.util
         
         public static bool LoadFromFile(string filePath, List<IActable> actors)
         {
-            Byte[] data;
             try
             {
                 using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
                 {
-                    data = new Byte[fs.Length];
+                    var data = new byte[fs.Length];
                     for (var i = 0; i < data.Length; i++)
                         data[i] = (byte) fs.ReadByte();
 
@@ -35,11 +34,10 @@ namespace _Flawless.util
         private static bool ApplyData(List<IActable> actors, Byte[] data)
         {
             var pos = 0;
-            int id;
 
             while (pos < data.LongLength)
             {
-                id = data[pos++];
+                int id = data[pos++];
                 int x;
                 int y;
 
@@ -71,7 +69,6 @@ namespace _Flawless.util
                         var tbPPT = Encoding.ASCII.GetString(data.Skip(pos).TakeWhile(d => d != 0).ToArray());
                         pos += tbPPT.Length + 1;
                         var tbST = BitConverter.ToSingle(data.Skip(pos).Take(4).Reverse().ToArray(), 0);
-                        Console.WriteLine(tbST);
                         pos += 4;
                         actors.Add(new TextBox(new SFML.System.Vector2f(x, y), tbMT, tbFPT, tbPPT, tbST));
                         break;

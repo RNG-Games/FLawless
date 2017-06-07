@@ -13,18 +13,17 @@ namespace _Flawless.actors
     public class TextBox : IActable
     {
         protected Text text; 
-        protected String toDisplay;
+        protected string toDisplay;
         protected Sprite texture = new Sprite(Resources.GetTexture("TestTB.png")); 
         protected Sprite portrait;
         protected Vector2f position;
-        protected Boolean expiration;
+        protected bool expiration;
         protected float frameCounter;
         protected float starttime = 0f;
 
-        public TextBox(Vector2f _position, String _text, String _font, String _portrait)
+        public TextBox(Vector2f _position, string _text, string _font, string _portrait)
         {
-            text = new Text("", Resources.GetFont(_font));
-            text.Color = new Color(0, 0, 0);
+            text = new Text("", Resources.GetFont(_font)) {Color = new Color(0, 0, 0)};
             toDisplay = _text;
             position = _position;
             expiration = false;
@@ -64,12 +63,13 @@ namespace _Flawless.actors
                 toDisplay = toDisplay.Substring(1);  //adjust toDisplay
                 frameCounter = 0;
             }
+
             texture.Position = position; 
             text.Position = new Vector2f (position.X + 100, position.Y + 20);  
             portrait.Position = new Vector2f(position.X + -25, position.Y -25); //portraits der Charaktere hängen jetzt vorerst in der oberen linken ecke
 
             if (frameCounter > 1.5) { position = new Vector2f(position.X, position.Y + (float)0.2); } //Despawn animation
-            if (frameCounter > 2) { expiration = true; } //After the full Text is displayed and 2 seconds(?) passed, textbox closes
+            if (frameCounter > 3) { expiration = true; } //After the full Text is displayed and 2 seconds(?) passed, textbox closes
         }
     }
 }
