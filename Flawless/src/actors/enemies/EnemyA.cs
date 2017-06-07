@@ -14,31 +14,33 @@ namespace _Flawless.actors.enemies
     class EnemyA : Enemy
     {
         PolarPattern test;
+        StreamPattern test2;
         public EnemyA(Vector2f position) : base(position) {
             texture = new Sprite(Resources.GetTexture("player.png")) { Position = position };
-            test = new PPBurst(45, Bullet.BulletType.C, position, new math.Angle(0f), new math.Angle(8f));
+            //test = new PPBurst(45, Bullet.BulletType.C, position, new math.Angle(0f), new math.Angle(8f));
+            test2 = new SingleSP(45, Bullet.BulletType.C, position, new math.Angle(0f), 3);
         }
 
         public override void Draw(RenderWindow _window)
         {
             base.Draw(_window);
-            test.Draw(_window);
+            test2.Draw(_window);
         }
 
         public override void Update(float _deltaTime)
         {
 
             base.Update(_deltaTime);
-            if (frameCounter % 10000 < 5000)
+            /*if (frameCounter % 10000 < 5000)
             {
                 position.X += 0.1f;
             }
             else
             {
                 position.X -= 0.1f;
-            }
+            }*/
             texture.Position = position;
-            test.Update(_deltaTime);
+            test2.Update(_deltaTime);
         }
     }
 }

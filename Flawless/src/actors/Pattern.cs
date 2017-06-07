@@ -15,14 +15,12 @@ namespace _Flawless.actors
         protected List<Bullet> bulletList;
         protected BulletFactory factory;
         protected Vector2f position;
-        public virtual void Draw(RenderWindow _window) {}
 
         public int GetBulletNum() { return bulletNum; }
         public Bullet.BulletType GetBulletType() { return type; }
         public List<Bullet> GetBulletList() { return bulletList; }
         public Vector2f GetPosition() { return position; }
         public virtual Pattern GetCopy(Vector2f position) { return null; }
-
 
         public bool IsExpired()
         {
@@ -35,6 +33,20 @@ namespace _Flawless.actors
             return 0f;
         }
 
-        public virtual void Update(float _deltaTime) {}
+        public virtual void Update(float _deltaTime) {
+            bulletList = bulletList.Where(b => !b.IsExpired()).ToList();
+            foreach (var current in bulletList)
+            {
+                current.Update(_deltaTime);
+            }
+        }
+
+        public virtual void Draw(RenderWindow _window)
+        {
+            foreach (var bullet in bulletList)
+            {
+                bullet.Draw(_window);
+            }
+        }
     }
 }

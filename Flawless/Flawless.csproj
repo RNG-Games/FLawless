@@ -81,7 +81,8 @@
     <Compile Include="src\actors\EnemyFactory.cs" />
     <Compile Include="src\actors\IActable.cs" />
     <Compile Include="src\actors\Pattern.cs" />
-    <Compile Include="src\actors\patterns\PatternA.cs" />
+    <Compile Include="src\actors\patterns\PolarPattern.cs" />
+    <Compile Include="src\actors\patterns\StreamPattern.cs" />
     <Compile Include="src\actors\Player.cs" />
     <Compile Include="src\actors\PlayerBullet.cs" />
     <Compile Include="src\actors\TextBox.cs" />

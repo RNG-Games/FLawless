@@ -28,15 +28,6 @@ namespace _Flawless.actors.patterns
             factory = new BulletFactory();
             bulletList = new List<Bullet>();
         }
-
-        protected virtual void updateBullets(float _deltaTime)
-        {
-            bulletList = bulletList.Where(b => !b.IsExpired()).ToList();
-            foreach (var current in bulletList)
-            {
-                current.Update(_deltaTime);
-            }
-        }
     }
 
     /* Constant Polar Pattern */
@@ -55,20 +46,6 @@ namespace _Flawless.actors.patterns
         public override Pattern GetCopy(Vector2f position)
         {
             return new PPBurst(this.GetBulletNum(), this.GetBulletType(), position, this.GetAngle(), this.GetAngleChange());
-        }
-
-        public override void Draw(RenderWindow _window)
-        {
-            base.Draw(_window);
-            foreach (var bullet in bulletList)
-            {
-                bullet.Draw(_window);
-            }
-        }
-
-        public override void Update(float _deltaTime)
-        {
-            updateBullets(_deltaTime);
         }
     }
 
@@ -96,7 +73,7 @@ namespace _Flawless.actors.patterns
                 }
             }
 
-            updateBullets(_deltaTime);
+            base.Update(_deltaTime);
             timeCounter += _deltaTime;
         }
 
