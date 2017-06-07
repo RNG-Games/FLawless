@@ -17,14 +17,12 @@ namespace _Flawless.gamestates
         private float escPause = 2f;
         private float time = 0f;
 
-        public PlayState() : this("")
-        {
-            util.Loader.LoadFromFile("content\\stages\\Test.bin", actors);
-        }
+        public PlayState() : this("content\\stages\\Test.bin"){}
 
         public PlayState(string StagePath)
         {
             actors.Add(Resources.GetPlayer());
+            util.Loader.LoadFromFile(StagePath,actors);
         }
 
         public override void Draw(RenderWindow _window)
