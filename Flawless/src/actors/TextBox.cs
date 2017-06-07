@@ -8,7 +8,8 @@ using SFML.Graphics;
 
 namespace _Flawless.actors
 {
-    //ID Bytes: 0000 0010 = 02 = 2
+    //ID Bytes: 0000 0010 = 02 = 2 : Textbox without starttime
+    //ID Bytes: 0000 0001 = 01 = 1 : Textbox with starttime
     public class TextBox : IActable
     {
         protected Text text; 
@@ -18,6 +19,7 @@ namespace _Flawless.actors
         protected Vector2f position;
         protected Boolean expiration;
         protected float frameCounter;
+        protected float starttime = 0f;
 
         public TextBox(Vector2f _position, String _text, String _font, String _portrait)
         {
@@ -27,6 +29,11 @@ namespace _Flawless.actors
             position = _position;
             expiration = false;
             portrait = new Sprite(Resources.GetTexture(_portrait));
+        }
+
+        public TextBox(Vector2f _position, string _text, string _font, string _portrait, float _starttime) :this(_position,_text,_font,_portrait)
+        {
+            starttime = _starttime;
         }
 
         public void Draw(RenderWindow _window)
@@ -43,7 +50,7 @@ namespace _Flawless.actors
 
         public float StartTime()
         {
-            return 0; //vorläufig zur exeption vermeidung
+            return starttime;
         }
 
 

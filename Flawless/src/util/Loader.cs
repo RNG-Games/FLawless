@@ -22,9 +22,6 @@ namespace _Flawless.util
                     for (var i = 0; i < data.Length; i++)
                         data[i] = (byte) fs.ReadByte();
 
-                    //String[] ausw = BitConverter.ToString(data).Split('-');
-
-
                     return ApplyData(actors, data);
                 }
             }
@@ -33,14 +30,11 @@ namespace _Flawless.util
                 Console.WriteLine("Exception caught in process: {0}", ex);
                 return false;
             }
-
-            actors.Add(new Player());
-            return true;
         }
 
         private static bool ApplyData(List<IActable> actors, Byte[] data)
         {
-            int pos = 0;
+            var pos = 0;
             int id;
 
             while (pos < data.LongLength)
@@ -48,10 +42,12 @@ namespace _Flawless.util
                 id = data[pos++];
                 int x;
                 int y;
+
+                //ID: 1 Byte
                 switch (id)
                 {
-                    ///HEX: AA      Test EnemyA
-                    ///2 Bytes: X-Pos; 2 Bytes: Y-Pos
+                    //HEX: AA      Test EnemyA
+                    //2 Bytes: X-Pos; 2 Bytes: Y-Pos
                     case 170:
                         
                         x = Convert.ToInt32(BitConverter.ToString(data.Skip(pos).Take(2).ToArray()).Replace("-", ""),16);
@@ -61,8 +57,26 @@ namespace _Flawless.util
                         actors.Add(EnemyFactory.GetEnemy("A", x, y));
                         break;
 
-                    ///HEX: 02      TextBox
-                    ///2 Bytes: X-Pos; 2 Bytes: Y-Pos; n Bytes: Message (end by '00'); n Bytes: Font (end by '00'); n Bytes: Portrait (end by '00')
+                    //HEX: 01      Textbox with starttime
+                    //2 Bytes: x-Pos, 2 Bytes: Y-Pos; n Bytes: Message (end by '00'); n Bytes: Font (end by '00'); n Bytes: Portrait (end by '00'); n Bytes: starttime as int in sec/10 (end by '00')
+                    case 1:
+                        x = Convert.ToInt32(BitConverter.ToString(data.Skip(pos).Take(2).ToArray()).Replace("-", ""), 16);
+                        pos += 2;
+                        y = Convert.ToInt32(BitConverter.ToString(data.Skip(pos).Take(2).ToArray()).Replace("-", ""), 16);
+                        pos += 2;
+                        var tbMT = Encoding.ASCII.GetString(data.Skip(pos).TakeWhile(d => d != 0).ToArray());
+                        pos += tbMT.Length + 1;
+                        var tbFPT = Encoding.ASCII.GetString(data.Skip(pos).TakeWhile(d => d != 0).ToArray());
+                        pos += tbFPT.Length + 1;
+                        var tbPPT = Encoding.ASCII.GetString(data.Skip(pos).TakeWhile(d => d != 0).ToArray());
+                        pos += tbPPT.Length + 1;
+                        var tbST = BitConverter.ToSingle(data, pos);
+                        pos += 4;
+                        actors.Add(new TextBox(new SFML.System.Vector2f(x, y), tbMT, tbFPT, tbPPT, tbST));
+                        break;
+
+                    //HEX: 02      TextBox without starttime
+                    //2 Bytes: X-Pos; 2 Bytes: Y-Pos; n Bytes: Message (end by '00'); n Bytes: Font (end by '00'); n Bytes: Portrait (end by '00')
                     case 2:
                         x = Convert.ToInt32(BitConverter.ToString(data.Skip(pos).Take(2).ToArray()).Replace("-", ""), 16);
                         pos += 2;
@@ -75,6 +89,11 @@ namespace _Flawless.util
                         var tbPortraitPath = Encoding.ASCII.GetString(data.Skip(pos).TakeWhile(d => d != 0).ToArray());
                         pos += tbPortraitPath.Length + 1;
                         actors.Add(new TextBox(new SFML.System.Vector2f(x, y), textboxmessage, tbFontPath, tbPortraitPath));
+                        break;
+
+
+                    default:
+
                         break;
                 }
             }
