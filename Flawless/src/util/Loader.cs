@@ -21,7 +21,7 @@ namespace _Flawless.util
                     for (var i = 0; i < data.Length; i++)
                         data[i] = (byte) fs.ReadByte();
 
-                    return ApplyData(actors, data);
+                    return ApplyLoadingData(actors, data);
                 }
             }
             catch (Exception ex)
@@ -31,7 +31,7 @@ namespace _Flawless.util
             }
         }
 
-        private static bool ApplyData(List<IActable> actors, Byte[] data)
+        private static bool ApplyLoadingData(List<IActable> actors, Byte[] data)
         {
             var pos = 0;
 
@@ -97,6 +97,36 @@ namespace _Flawless.util
             }
 
             return true;
+        }
+
+        public static bool SaveToFile(string filePath, List<IActable> actors)
+        {
+            try
+            {
+                using (var fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                {
+                    var data = GetData(actors.OfType<ISaveable>());
+                    fs.Write(data, 0, data.Length);
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                return false;
+            }
+            return true;
+        }
+
+        private static byte[] GetData(IEnumerable<ISaveable> objects)
+        {
+            var data = new List<Byte>();
+            foreach (var saveable in objects)
+            {
+                var temp = saveable.GetData();
+                data.Add(temp.Item1);
+                data.AddRange(temp.Item2);
+            }
+            return data.ToArray();
         }
     }
 }
