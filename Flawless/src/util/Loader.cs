@@ -31,7 +31,13 @@ namespace _Flawless.util
             }
         }
 
-        private static bool ApplyLoadingData(List<IActable> actors, Byte[] data)
+        /***
+         * BitConverter.ToSingle uses Little Endian
+         * eg: 5.0f: Big Endian: 40 A0 00 00
+         *           Little End; 00 00 A0 40
+         */
+
+        private static bool ApplyLoadingData(ICollection<IActable> actors, byte[] data)
         {
             var pos = 0;
 
@@ -62,15 +68,15 @@ namespace _Flawless.util
                         pos += 2;
                         y = Convert.ToInt32(BitConverter.ToString(data.Skip(pos).Take(2).ToArray()).Replace("-", ""), 16);
                         pos += 2;
-                        var tbMT = Encoding.ASCII.GetString(data.Skip(pos).TakeWhile(d => d != 0).ToArray());
-                        pos += tbMT.Length + 1;
-                        var tbFPT = Encoding.ASCII.GetString(data.Skip(pos).TakeWhile(d => d != 0).ToArray());
-                        pos += tbFPT.Length + 1;
-                        var tbPPT = Encoding.ASCII.GetString(data.Skip(pos).TakeWhile(d => d != 0).ToArray());
-                        pos += tbPPT.Length + 1;
-                        var tbST = BitConverter.ToSingle(data.Skip(pos).Take(4).Reverse().ToArray(), 0);
+                        var tbMt = Encoding.ASCII.GetString(data.Skip(pos).TakeWhile(d => d != 0).ToArray());
+                        pos += tbMt.Length + 1;
+                        var tbFpT = Encoding.ASCII.GetString(data.Skip(pos).TakeWhile(d => d != 0).ToArray());
+                        pos += tbFpT.Length + 1;
+                        var tbPpT = Encoding.ASCII.GetString(data.Skip(pos).TakeWhile(d => d != 0).ToArray());
+                        pos += tbPpT.Length + 1;
+                        var tbST = BitConverter.ToSingle(data, pos);
                         pos += 4;
-                        actors.Add(new TextBox(new SFML.System.Vector2f(x, y), tbMT, tbFPT, tbPPT, tbST));
+                        actors.Add(new TextBox(new SFML.System.Vector2f(x, y), tbMt, tbFpT, tbPpT, tbST));
                         break;
 
                     //HEX: 02      TextBox without starttime
@@ -119,7 +125,7 @@ namespace _Flawless.util
 
         private static byte[] GetData(IEnumerable<ISaveable> objects)
         {
-            var data = new List<Byte>();
+            var data = new List<byte>();
             foreach (var saveable in objects)
             {
                 var temp = saveable.GetData();
