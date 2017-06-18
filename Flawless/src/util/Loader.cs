@@ -115,9 +115,9 @@ namespace _Flawless.util
                     fs.Write(data, 0, data.Length);
                 }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                Console.WriteLine(exception);
+                Console.WriteLine("Exception caught in process: {0}", ex);
                 return false;
             }
             return true;
