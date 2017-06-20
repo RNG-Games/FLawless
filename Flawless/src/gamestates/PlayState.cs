@@ -16,6 +16,7 @@ namespace _Flawless.gamestates
         private List<IActable> actors = new List<IActable>();
         private float escPause = 2f;
         private float time = 0f;
+        private Sprite overlay;
 
         public PlayState() : this("content\\stages\\Test.bin"){}
 
@@ -23,6 +24,14 @@ namespace _Flawless.gamestates
         {
             actors.Add(Resources.GetPlayer());
             util.Loader.LoadFromFile(StagePath,actors);
+
+            overlay = new Sprite(Program.sixteenToNine
+                ? Resources.GetTexture("hud16-9.png")
+                : Resources.GetTexture("hud4-3.png"))
+            {
+                Position = new Vector2f(0, 0),
+                Scale = new Vector2f(1, 1) * Program.scale
+            };
         }
 
         public override void Draw(RenderWindow _window)
@@ -32,6 +41,7 @@ namespace _Flawless.gamestates
             {
                 act.Draw(_window);
             }
+            _window.Draw(overlay);
           
         }
 
