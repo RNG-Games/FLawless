@@ -20,7 +20,7 @@ namespace _Flawless.actors
         private float firecounter = 0.2f;
         private float eRegenCounter = 0.5f;
         private float energy = 1f;
-        private Text text = new Text("", Resources.GetFont("trebuc.ttf"));
+        private Text text = new Text("", Resources.GetFont("rabelo.ttf"));
         private float protection = 0f;
         private bool dying = false;
 

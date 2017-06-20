@@ -11,12 +11,13 @@ namespace _Flawless
     {
         public static RenderWindow window;
         public static Stack<GameState> states = new Stack<GameState>();
+        public static bool fullscreen = false;
 
         static void Main(string[] args)
         {
-            window = new RenderWindow(new VideoMode(1280, 720), "Window Title"/*, Styles.Fullscreen , new ContextSettings() {AntialiasingLevel = 16 }*/);
+            window = new RenderWindow(new VideoMode(1280, 720), "Window Title"/*, Styles.Fullscreen*/);
             window.Closed += (sender, e) => { var o = sender as Window; o?.Close(); Environment.Exit(0); };
-            var text = new Text { Font = Resources.GetFont("trebuc.ttf") };
+            var text = new Text { Font = Resources.GetFont("rabelo.ttf") };
 
             // initialize GameTime
             var clock = new Clock();
