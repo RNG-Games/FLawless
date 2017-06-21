@@ -7,6 +7,7 @@ using SFML.Graphics;
 using SFML.Window;
 using SFML.System;
 using _Flawless.actors;
+using _Flawless.actors.enemies;
 
 namespace _Flawless.gamestates
 {
@@ -23,7 +24,8 @@ namespace _Flawless.gamestates
         public PlayState(string StagePath)
         {
             actors.Add(Resources.GetPlayer());
-            util.Loader.LoadFromFile(StagePath,actors);
+            actors.Add(new TestEnemy(5f, new Vector2f(200,300)));
+            //util.Loader.LoadFromFile(StagePath,actors);
 
             overlay = new Sprite(Program.sixteenToNine
                 ? Resources.GetTexture("hud16-9.png")

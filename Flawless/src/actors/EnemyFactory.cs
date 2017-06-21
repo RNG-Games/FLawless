@@ -15,7 +15,7 @@ namespace _Flawless.actors
             Vector2f position = new Vector2f(x, y);
             if(enemyType == "A")
             {
-                return new EnemyA(position);
+                return new TestEnemy(0f, position);
             }
             return null;
         }

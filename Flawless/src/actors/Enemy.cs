@@ -5,19 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using SFML.System;
 using SFML.Graphics;
+using _Flawless.src.ai2;
 
 namespace _Flawless.actors
 {
     abstract class Enemy : IActable
     {
+        protected float startTime;
         protected Vector2f position;
+        protected Movement movement;
         protected Sprite texture;
-        protected Queue<Pattern> patternQueue = new Queue<Pattern>();
-        protected int frameCounter;
 
-        public Enemy(Vector2f position)
+        protected int frameCounter = 0;
+        protected Boolean isExpired = false;
+        protected Queue<Pattern> patternQueue = new Queue<Pattern>();
+        protected Pattern currentPattern = null;
+
+        public Enemy(float _startTime, Vector2f _position, Sprite _texture)
         {
-            this.position = position;
+            startTime = _startTime;
+            position = _position;
+            texture = _texture;
         }
 
         public virtual void Draw(RenderWindow _window)
@@ -25,32 +33,22 @@ namespace _Flawless.actors
             _window.Draw(texture);
         }
 
-        public Vector2f GetPosition()
-        {
-            return position;
-        }
-
-        public void SetPosition(float x, float y)
-        {
-            position = new Vector2f(x, y);
-        }
-
-        public Boolean IsExpired()
-        { return false; }
-
         public virtual void Update(float _deltaTime)
         {
-            frameCounter++;
+            /* movement */
+            position = movement.NewPosition(position, _deltaTime);
+            texture.Position = position;
+            /* patterns */
+            if (currentPattern != null) currentPattern.Update(_deltaTime);
+            /* miscellaneous */
+            ++frameCounter;
         }
 
-        public float StartTime()
-        {
-            return 0f;
-        }
-
-        //void KillEnemy
-        //void SetStartTime(float time)
-        //void ResetEnemy()
-        //void TakeControl()
+        public float StartTime() { return startTime; }
+        public Vector2f Position() { return position; }
+        public Sprite Texture() { return texture; }
+        public int FrameCounter() { return frameCounter; }
+        public Boolean IsExpired() { return isExpired; }
+        public Pattern CurrentPattern() { return currentPattern; }
     }
 }

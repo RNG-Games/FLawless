@@ -52,7 +52,11 @@ namespace _Flawless.math
             if ( position.Y < spawnPosition.Y) { angle = 360 - angle; }    //if the positon is below the spwan, the angle is "spun" around the x axis
             return new Vector2f(radius, angle);
         }
-        
+
+        public static float length (Vector2f vector )
+        {
+            return (float) Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
+        }
     }
 }
 

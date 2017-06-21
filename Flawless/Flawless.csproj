@@ -89,6 +89,7 @@
     <Compile Include="src\actors\Player.cs" />
     <Compile Include="src\actors\PlayerBullet.cs" />
     <Compile Include="src\actors\TextBox.cs" />
+    <Compile Include="src\ai2\Movement.cs" />
     <Compile Include="src\gamestates\GameState.cs" />
     <Compile Include="src\gamestates\MainState.cs" />
     <Compile Include="src\gamestates\MenuState.cs" />

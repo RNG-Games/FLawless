@@ -6,11 +6,26 @@ using System.Threading.Tasks;
 using SFML.Graphics;
 using SFML.System;
 using _Flawless.actors.patterns;
+using _Flawless.src.ai2;
 
 namespace _Flawless.actors.enemies
 {
-
     //ID Bytes: 1010 1010 = AA = 170
+
+    class TestEnemy : Enemy
+    {
+        public TestEnemy(float _startTime, Vector2f _position) : base(_startTime, _position, new Sprite(Resources.GetTexture("player.png")))
+        {
+            var stateList = new Queue<Movement.State>();
+            stateList.Enqueue(Movement.State.StraightIn);
+            stateList.Enqueue(Movement.State.StandStill5s);
+            stateList.Enqueue(Movement.State.StraightOut);
+            movement = new Movement(stateList, 300f, _position);
+            position = movement.SpawnPosition(_position);
+        }
+    }
+
+    /*
     class EnemyA : Enemy
     {
         PolarPattern test;
@@ -31,16 +46,9 @@ namespace _Flawless.actors.enemies
         {
 
             base.Update(_deltaTime);
-            /*if (frameCounter % 10000 < 5000)
-            {
-                position.X += 0.1f;
-            }
-            else
-            {
-                position.X -= 0.1f;
-            }*/
             texture.Position = position;
             test2.Update(_deltaTime);
         }
     }
+    */
 }
