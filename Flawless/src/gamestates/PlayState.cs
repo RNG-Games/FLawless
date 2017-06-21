@@ -24,7 +24,6 @@ namespace _Flawless.gamestates
         public PlayState(string StagePath)
         {
             actors.Add(Resources.GetPlayer());
-            actors.Add(new TestEnemy(5f, new Vector2f(200,300)));
             //util.Loader.LoadFromFile(StagePath,actors);
 
             overlay = new Sprite(Program.sixteenToNine

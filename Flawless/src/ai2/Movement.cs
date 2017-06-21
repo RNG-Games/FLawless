@@ -25,6 +25,7 @@ namespace _Flawless.src.ai2
         Queue<State> stateList;
         State state;
         Vector2f destination;
+        bool outDestination;
         float timePassed;
 
         public Movement(Queue<State> _stateList, float _speed, Vector2f _destination)
@@ -34,6 +35,7 @@ namespace _Flawless.src.ai2
             destination = _destination;
 
             timePassed = float.MinValue;
+            outDestination = false;
             state = stateList.Dequeue();
         }
 
@@ -79,7 +81,6 @@ namespace _Flawless.src.ai2
 
                 case State.StandStill5s:
                     if (timePassed == float.MinValue) timePassed = 0f;
-                    System.Console.WriteLine(timePassed);
                     timePassed += _deltaTime;
                     if (timePassed < 5f) return _position;
                     else
@@ -90,7 +91,9 @@ namespace _Flawless.src.ai2
                     }
 
                 case State.StraightOut:
-                    return _position + new Vector2f(0,50*speed*_deltaTime);
+                    if (Math.Abs(_position.X - leftBorder) < Math.Abs(_position.X - rightBorder)) return NewPosition(_position, new Vector2f(leftBorder-20, topBorder-10) - _position, _deltaTime);
+                    else return NewPosition(_position, new Vector2f(rightBorder+20, topBorder-10) - _position, _deltaTime);
+
 
                 /*case State.Announcement:
                     return new Vector2f(0, 0);
