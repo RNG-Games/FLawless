@@ -18,7 +18,8 @@ namespace _Flawless.src.ai2
         {
             StraightIn,
             StraightOut,
-            StandStill5s
+            StandStill5s,
+            StandStill10s
         }
 
         float speed;
@@ -90,22 +91,20 @@ namespace _Flawless.src.ai2
                         return _position;
                     }
 
+                case State.StandStill10s:
+                    if (timePassed == float.MinValue) timePassed = 0f;
+                    timePassed += _deltaTime;
+                    if (timePassed < 10f) return _position;
+                    else
+                    {
+                        timePassed = float.MinValue;
+                        state = stateList.Dequeue();
+                        return _position;
+                    }
+
                 case State.StraightOut:
                     if (Math.Abs(_position.X - leftBorder) < Math.Abs(_position.X - rightBorder)) return NewPosition(_position, new Vector2f(leftBorder-20, topBorder-10) - _position, _deltaTime);
                     else return NewPosition(_position, new Vector2f(rightBorder+20, topBorder-10) - _position, _deltaTime);
-
-
-                /*case State.Announcement:
-                    return new Vector2f(0, 0);
-
-                case State.TakingPosition:
-                    return NewPosition(_position, tpDestination - _position, _deltaTime);
-
-                case State.Loop:
-                    return new Vector2f(0, 0);
-
-                case State.LeavingPosition:
-                    return NewPosition(_position, _position - lpDestination, _deltaTime);*/
 
                 default:
                     return _position;
