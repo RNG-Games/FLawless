@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SFML.System;
 using SFML.Graphics;
-using _Flawless.src.ai2;
+using _Flawless.ai2;
 
 namespace _Flawless.actors
 {

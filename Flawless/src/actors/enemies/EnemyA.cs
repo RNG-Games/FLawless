@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SFML.Graphics;
 using SFML.System;
 using _Flawless.actors.patterns;
-using _Flawless.src.ai2;
+using _Flawless.ai2;
 
 namespace _Flawless.actors.enemies
 {

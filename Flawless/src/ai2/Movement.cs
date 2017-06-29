@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SFML.System;
 using _Flawless.math;
 
-namespace _Flawless.src.ai2
+namespace _Flawless.ai2
 {
     class Movement
     {
