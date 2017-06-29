@@ -51,8 +51,7 @@ namespace _Flawless.gamestates
             escPause -= _deltaTime;
             time += _deltaTime;
 
-            actors = actors.Skip(1).AsParallel().Where(a => !a.IsExpired()).ToList();
-            //actors = actors.Where(a => !a.IsExpired()).ToList();
+            actors = actors.Where(a => !a.IsExpired()).ToList();
             foreach (var act in actors.Where(a => a.StartTime() <= time))
             {
                 act.Update(_deltaTime);
