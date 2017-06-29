@@ -13,10 +13,9 @@ namespace _Flawless.gamestates
 {
     class PlayState : GameState
     {
-        //private Player _player;
         private List<IActable> actors = new List<IActable>();
-        private float escPause = 2f;
-        private float time = 0f;
+        private float escPause = 1f;
+        private float time;
         private Sprite overlay;
 
         public PlayState() : this("content\\stages\\Test.bin"){}
@@ -32,7 +31,6 @@ namespace _Flawless.gamestates
                 : Resources.GetTexture("hud4-3.png"))
             {
                 Position = new Vector2f(0, 0),
-                Scale = new Vector2f(1, 1) * Program.scale
             };
         }
 
@@ -43,7 +41,8 @@ namespace _Flawless.gamestates
             {
                 act.Draw(_window);
             }
-            _window.Draw(overlay);
+            if(!Program.debug)
+                _window.Draw(overlay);
           
         }
 
@@ -52,7 +51,8 @@ namespace _Flawless.gamestates
             escPause -= _deltaTime;
             time += _deltaTime;
 
-            actors = actors.Where(a => !a.IsExpired()).ToList();
+            actors = actors.Skip(1).AsParallel().Where(a => !a.IsExpired()).ToList();
+            //actors = actors.Where(a => !a.IsExpired()).ToList();
             foreach (var act in actors.Where(a => a.StartTime() <= time))
             {
                 act.Update(_deltaTime);

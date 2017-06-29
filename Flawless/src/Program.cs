@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -14,11 +15,14 @@ namespace _Flawless
         public static bool fullscreen = false;
         public static float scale;
         public static bool sixteenToNine;
+        internal static bool debug = false;
+
         static void Main(string[] args)
         {
             
             
-            sixteenToNine =false;
+            sixteenToNine = Properties.Settings.Default.format.Equals("16:9");
+
             if (sixteenToNine)
             {
                 window = new RenderWindow(new VideoMode(1280,720), "Window Title");
@@ -31,14 +35,18 @@ namespace _Flawless
             }
 
             window.Closed += (sender, e) => { var o = sender as Window; o?.Close(); Environment.Exit(0); };
-
+            window.KeyPressed += (sender, e) =>
+            {
+                if (e.Code == Keyboard.Key.J)
+                    debug = !debug;
+            };
             var text = new Text { Font = Resources.GetFont("rabelo.ttf") };
 
             // initialize GameTime
             var clock = new Clock();
             states.Push(new MenuState());
             var time = 0f;
-
+            
             while (states.Count > 0)
             {
                 var deltaTime = clock.ElapsedTime.AsSeconds();
@@ -54,6 +62,8 @@ namespace _Flawless
                 window.Clear(new Color(100, 149, 237));
                 current.Draw(window);
 
+                window.SetView(new View(new Vector2f(960, 540), new Vector2f(1920, 1080)));
+                
                 window.Draw(text); //display deltaTime in seconds
                 window.Display();
 

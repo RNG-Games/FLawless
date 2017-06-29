@@ -36,9 +36,9 @@ namespace _Flawless.actors
             position += speed * _deltaTime;
             texture.Position = position;
             hitbox.setPosition(hitbox.middle + speed);
-            if (position.X < -5f || position.Y < -5)
+            if (position.X < -10f || position.Y < -10)
                 expired = true;
-            if (position.X > Program.window.Size.X + 5 || position.Y > Program.window.Size.Y + 5)
+            if (position.X > Program.window.GetView().Size.X + 10f || position.Y > Program.window.GetView().Size.Y + 10f)
                 expired = true;
         }
 

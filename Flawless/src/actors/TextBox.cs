@@ -23,7 +23,7 @@ namespace _Flawless.actors
 
         public TextBox(Vector2f _position, string _text, string _font, string _portrait)
         {
-            text = new Text("", Resources.GetFont(_font)) {Color = new Color(0, 0, 0)};
+            text = new Text("", Resources.GetFont(_font)) {FillColor = new Color(0, 0, 0)};
             toDisplay = _text;
             position = _position;
             expiration = false;
