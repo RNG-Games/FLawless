@@ -14,14 +14,14 @@ namespace _Flawless.actors
         private Vector2f speed;
         private Vector2f position;
         private Sprite texture;
-        public Circle hitbox { get; protected set; }
+        public Circle Hitbox { get; protected set; }
 
         public PlayerBullet(Vector2f position)
         {
             this.speed = new Vector2f(0,-600f);
             texture = new Sprite(Resources.GetTexture("pbullet.png"));
             this.position = position - new Vector2f(texture.Texture.Size.X/2f, 0);
-            hitbox = new Circle(position, texture.Texture.Size.X/2f);
+            Hitbox = new Circle(position, texture.Texture.Size.X/2f);
             texture.Position = position;
         }
         private bool expired = false;
@@ -35,10 +35,10 @@ namespace _Flawless.actors
         {
             position += speed * _deltaTime;
             texture.Position = position;
-            hitbox.setPosition(hitbox.middle + speed);
+            Hitbox.setPosition(Hitbox.middle + speed);
             if (position.X < -10f || position.Y < -10)
                 expired = true;
-            if (position.X > Program.window.GetView().Size.X + 10f || position.Y > Program.window.GetView().Size.Y + 10f)
+            if (position.X > Program.Window.GetView().Size.X + 10f || position.Y > Program.Window.GetView().Size.Y + 10f)
                 expired = true;
         }
 

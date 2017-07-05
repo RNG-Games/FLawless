@@ -24,7 +24,7 @@ namespace _Flawless.actors
 
         public Player()
         {
-            _position = new Vector2f(Program.window.Size.X / 2.0f, 500);
+            _position = new Vector2f(Program.Window.Size.X / 2.0f, 500);
             texture = new Sprite(Resources.GetTexture("player.png")) {Position = _position};
             speed = 300f;
             hitbox = new Circle(_position + new Vector2f(18.5f, 22.5f), 8.5f);
@@ -73,7 +73,6 @@ namespace _Flawless.actors
             move = CheckMove(move);
 
             _position += move;
-
             texture.Position = _position;
             hitbox.addToPostion(move);
 
@@ -99,19 +98,18 @@ namespace _Flawless.actors
 
         private Vector2f CheckMove(Vector2f move)
         {
+            #if DEBUG
             if (Program.debug)
-            {
                 return move;
-            }
-
+            #endif
             //TODO: Test
-            if (hitbox.middle.X - hitbox.radius <= Program.window.GetView().Size.X * (137f/960) && move.X < 0)
+            if (hitbox.middle.X - hitbox.radius <= 274f && move.X < 0)
                 move.X = 0;
-            if (hitbox.middle.X + hitbox.radius >= Program.window.GetView().Size.X * (1153f/1920) && move.X > 0)
+            if (hitbox.middle.X + hitbox.radius >= 1153f && move.X > 0)
                 move.X = 0;
-            if (hitbox.middle.Y - hitbox.radius <= Program.window.GetView().Size.Y * (17f/540) && move.Y < 0)
+            if (hitbox.middle.Y - hitbox.radius <= 34f && move.Y < 0)
                 move.Y = 0;
-            if (hitbox.middle.Y + hitbox.radius >= Program.window.GetView().Size.Y * (523f/540) && move.Y > 0)
+            if (hitbox.middle.Y + hitbox.radius >= 1046f && move.Y > 0)
                 move.Y = 0;
 
             return move;

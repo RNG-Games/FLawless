@@ -71,10 +71,10 @@ namespace _Flawless.actors
         protected virtual void CheckLocation()
         {
             if (hitbox.middle.X + hitbox.radius < -(hitbox.radius * 3) || hitbox.middle.X - hitbox.radius > 
-                Program.window.Size.X + (hitbox.radius * 3))
+                Program.Window.GetView().Size.X + (hitbox.radius * 3))
                 expiration = true;
             if (hitbox.middle.Y + hitbox.radius < -(hitbox.radius * 3) || hitbox.middle.Y - hitbox.radius >
-                Program.window.Size.Y + (hitbox.radius * 3))
+                Program.Window.GetView().Size.X + (hitbox.radius * 3))
                 expiration = true;
         }
     }

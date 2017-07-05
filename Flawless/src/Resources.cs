@@ -7,32 +7,37 @@ namespace _Flawless
 {
 	class Resources
 	{
-		static Dictionary<string, Texture> textures = new Dictionary<string, Texture>();
-		static Dictionary<string, Font> fonts = new Dictionary<string, Font>();
-	    static Player _player;
+		private static readonly Dictionary<string, Texture> Textures = new Dictionary<string, Texture>();
+		private static readonly Dictionary<string, Font> Fonts = new Dictionary<string, Font>();
+        private static readonly Dictionary<string, Image> Images = new Dictionary<string, Image>();
+	    private static Player _player;
 
 		public static Texture GetTexture(string textureName)
 		{
-			if(!textures.ContainsKey(textureName))
-			{
-				textures.Add(textureName, new Texture("content/texture/" + textureName));
-			}
-			return textures[textureName];
+			if(!Textures.ContainsKey(textureName))
+				Textures.Add(textureName, new Texture("content/texture/" + textureName));
+			return Textures[textureName];
 		}
 
-		public static Font GetFont(string name)
+		public static Font GetFont(string fontName)
 		{
-			if (!fonts.ContainsKey(name))
-			{
-				fonts.Add(name, new Font("content/font/" + name));
-			}
-			return fonts[name];
+			if (!Fonts.ContainsKey(fontName))
+				Fonts.Add(fontName, new Font("content/font/" + fontName));
+			return Fonts[fontName];
 		}
+
+	    public static Image GetImage(string imageName)
+	    {
+	        if(!Images.ContainsKey(imageName))
+                Images.Add(imageName, new Image("content/image/" + imageName));
+	        return Images[imageName];
+	    }
 
 	    public static void NewPlayer()
 	    {
 	        _player = new Player();
 	    }
+
 	    public static Player GetPlayer()
 	    {
 	        if (_player == null)

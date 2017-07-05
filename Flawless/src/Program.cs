@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Linq;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -8,74 +8,162 @@ using _Flawless.gamestates;
 
 namespace _Flawless
 {
-    class Program
+    internal class Program
     {
-        public static RenderWindow window;
-        public static Stack<GameState> states = new Stack<GameState>();
-        public static bool fullscreen = false;
-        public static float scale;
-        public static bool sixteenToNine;
-        internal static bool debug = false;
+
+        #region public Attributes
+
+        public static RenderWindow Window;
+        public static Stack<GameState> States = new Stack<GameState>();
+
+        #if DEBUG
+        public static bool debug = false;
+        #endif
+
+        #endregion
+
+        #region private Attributes
+
+        private static readonly Dictionary<bool, RenderWindow> WindowCache = new Dictionary<bool, RenderWindow>();
+        private static bool _isFullscreen;
+        private static Clock _clock;
+        private static float deltaTime;
+        private static float gameTime;
+        private static GameState current;
+
+        #endregion
+
+        #region Logic
+
+        private static void Init()
+        {
+            _isFullscreen = Properties.Settings.Default.fullscreen;
+            _clock = new Clock();
+            gameTime = 0f;
+            States.Push(new MenuState());
+        }
 
         static void Main(string[] args)
         {
-            
-            
-            sixteenToNine = Properties.Settings.Default.format.Equals("16:9");
+            Init();
+            AttachWindow();
 
-            if (sixteenToNine)
+            while (Window.IsOpen)
             {
-                window = new RenderWindow(new VideoMode(1280,720), "Window Title");
-                scale = 2 / 3f;
-            }
-            else
-            {
-                window = new RenderWindow(new VideoMode(960, 720), "Window Title"/*, Styles.Fullscreen*/);
-                scale = 2 / 3f;
-            }
+                Window.DispatchEvents();
+                Update();
+                Render();
 
-            window.Closed += (sender, e) => { var o = sender as Window; o?.Close(); Environment.Exit(0); };
-            window.KeyPressed += (sender, e) =>
-            {
-                if (e.Code == Keyboard.Key.J)
-                    debug = !debug;
-            };
-            var text = new Text { Font = Resources.GetFont("rabelo.ttf") };
-
-            // initialize GameTime
-            var clock = new Clock();
-            states.Push(new MenuState());
-            var time = 0f;
-            
-            while (states.Count > 0)
-            {
-                var deltaTime = clock.ElapsedTime.AsSeconds();
-                time += deltaTime;
-                clock.Restart();
-                //text.DisplayedString = time.ToString();
-
-                // update
-                var current = states.Peek();
-                current.Update(deltaTime);
-
-                // draw
-                window.Clear(new Color(100, 149, 237));
-                current.Draw(window);
-
-                window.SetView(new View(new Vector2f(960, 540), new Vector2f(1920, 1080)));
-                
-                window.Draw(text); //display deltaTime in seconds
-                window.Display();
-
-                window.DispatchEvents();
-
-                // handle states
-                if (current.IsFinished) states.Pop();
-                if (current.NewState != null){ states.Push(current.NewState);
+                if (current.IsFinished)
+                    States.Pop();
+                if (current.NewState != null)
+                {
+                    States.Push(current.NewState);
                     current.NewState = null;
                 }
+                if(States.Count == 0)
+                    Window.Close();
+            }
+
+            DetachWindow();
+            foreach (var key in WindowCache.Keys.ToList())
+            {
+                WindowCache[key].Close();
+                WindowCache[key].Dispose();
+                WindowCache.Remove(key);
+            }
+            Properties.Settings.Default.Save();
+        }
+
+        #endregion
+
+        #region Update & Render
+
+        private static void Update()
+        {
+            deltaTime = _clock.ElapsedTime.AsSeconds();
+            gameTime += deltaTime;
+            _clock.Restart();
+            current = States.Peek();
+            current.Update(deltaTime);
+        }
+
+        private static void Render()
+        {
+            Window.Clear(new Color(100, 149, 237));
+            current.Draw(Window);
+            Window.SetView(new View(new Vector2f(960, 540), new Vector2f(1920, 1080)));
+            Window.Display();
+        }
+
+        #endregion
+
+        #region Window Handle
+
+        public static void AttachWindow()
+        {
+            DetachWindow();
+            if (!WindowCache.ContainsKey(_isFullscreen))
+            {
+                var window = new RenderWindow(
+                    _isFullscreen ? VideoMode.DesktopMode : new VideoMode(1280, 720),
+                    "MyApp",
+                    _isFullscreen ? Styles.Fullscreen : Styles.Default/*,
+                    new ContextSettings() { AntialiasingLevel = 16 }*/);
+
+                /* Set window icon
+                using (var image = Resources.GetImage("icon.png"))
+                {
+                    window.SetIcon(image.Size.X, image.Size.Y, image.Pixels);
+                }
+                */
+                WindowCache[_isFullscreen] = window;
+            }
+
+            Window = WindowCache[_isFullscreen];
+            Window.Closed += Window_OnClose;
+            Window.KeyPressed += Window_OnKeyPressed;
+            Window.SetVerticalSyncEnabled(true);
+            Window.SetVisible(true);
+            Window.SetActive(true);
+            Window.RequestFocus();
+        }
+
+        public static void DetachWindow()
+        {
+            if (Window == null)
+            {
+                return;
+            }
+            Window.Closed -= Window_OnClose;
+            Window.KeyPressed -= Window_OnKeyPressed;
+            Window.SetVisible(false);
+            Window = null;
+        }
+
+        #endregion
+
+        #region Events
+
+        private static void Window_OnClose(object sender, EventArgs e) { Window.Close(); }
+
+        private static void Window_OnKeyPressed(object sender, KeyEventArgs e)
+        {
+            #if DEBUG
+            if (e.Code == Keyboard.Key.J)
+                debug = !debug;
+            #endif
+
+            if (e.Code == Keyboard.Key.F11)
+            {
+                _isFullscreen = !_isFullscreen;
+                Properties.Settings.Default.fullscreen = _isFullscreen;
+                Properties.Settings.Default.Save();
+                AttachWindow();
             }
         }
+
+        #endregion
 
     }
 }

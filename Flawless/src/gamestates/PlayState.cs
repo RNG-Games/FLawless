@@ -25,9 +25,7 @@ namespace _Flawless.gamestates
             actors.Add(Resources.GetPlayer());
             //util.Loader.LoadFromFile(StagePath,actors);
 
-            overlay = new Sprite(Program.sixteenToNine
-                ? Resources.GetTexture("hud16-9.png")
-                : Resources.GetTexture("hud4-3.png"))
+            overlay = new Sprite(Resources.GetTexture("hud16-9.png"))
             {
                 Position = new Vector2f(0, 0),
             };
@@ -40,9 +38,11 @@ namespace _Flawless.gamestates
             {
                 act.Draw(_window);
             }
+
+            #if DEBUG
             if(!Program.debug)
                 _window.Draw(overlay);
-          
+            #endif 
         }
 
         public override void Update(float _deltaTime)
@@ -58,7 +58,7 @@ namespace _Flawless.gamestates
 
             if (escPause <= 0f && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
-                Program.states.Push(new PauseState());
+                Program.States.Push(new PauseState());
                 escPause = 2f;
             }
         }
