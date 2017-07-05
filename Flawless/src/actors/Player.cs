@@ -105,13 +105,13 @@ namespace _Flawless.actors
             }
 
             //TODO: Test
-            if (hitbox.middle.X - hitbox.radius <= Program.window.GetView().Size.X * (55f / 384) && move.X < 0)
+            if (hitbox.middle.X - hitbox.radius <= Program.window.GetView().Size.X * (137f/960) && move.X < 0)
                 move.X = 0;
-            if (hitbox.middle.X + hitbox.radius >= Program.window.GetView().Size.X * (3f / 5) && move.X > 0)
+            if (hitbox.middle.X + hitbox.radius >= Program.window.GetView().Size.X * (1153f/1920) && move.X > 0)
                 move.X = 0;
-            if (hitbox.middle.Y - hitbox.radius <= Program.window.GetView().Size.Y * (7f / 216) && move.Y < 0)
+            if (hitbox.middle.Y - hitbox.radius <= Program.window.GetView().Size.Y * (17f/540) && move.Y < 0)
                 move.Y = 0;
-            if (hitbox.middle.Y + hitbox.radius >= Program.window.GetView().Size.Y * (209f / 216) && move.Y > 0)
+            if (hitbox.middle.Y + hitbox.radius >= Program.window.GetView().Size.Y * (523f/540) && move.Y > 0)
                 move.Y = 0;
 
             return move;
