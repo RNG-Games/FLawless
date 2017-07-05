@@ -35,6 +35,12 @@ namespace _Flawless.actors
 
         public virtual void Update(float _deltaTime)
         {
+            /* expiration */
+            if (movement.state == Movement.State.Null)
+            {
+                isExpired = true;
+                return;
+            }
             /* movement */
             position = movement.NewPosition(position, _deltaTime);
             texture.Position = position;

@@ -16,17 +16,19 @@ namespace _Flawless.ai2
 
         public enum State
         {
+            Null,
             StraightIn,
             StraightOut,
+            CurvedIn,
+            CurvedOut,
             StandStill5s,
             StandStill10s
         }
 
         float speed;
         Queue<State> stateList;
-        State state;
+        public State state;
         Vector2f destination;
-        bool outDestination;
         float timePassed;
 
         public Movement(Queue<State> _stateList, float _speed, Vector2f _destination)
@@ -36,7 +38,6 @@ namespace _Flawless.ai2
             destination = _destination;
 
             timePassed = float.MinValue;
-            outDestination = false;
             state = stateList.Dequeue();
         }
 
@@ -79,7 +80,7 @@ namespace _Flawless.ai2
                         return destination;
                     }
                     return newPosition;
-
+                                              
                 case State.StandStill5s:
                     if (timePassed == float.MinValue) timePassed = 0f;
                     timePassed += _deltaTime;
@@ -103,11 +104,19 @@ namespace _Flawless.ai2
                     }
 
                 case State.StraightOut:
-                    if (Math.Abs(_position.X - leftBorder) < Math.Abs(_position.X - rightBorder)) return NewPosition(_position, new Vector2f(leftBorder-20, topBorder-10) - _position, _deltaTime);
-                    else return NewPosition(_position, new Vector2f(rightBorder+20, topBorder-10) - _position, _deltaTime);
+                    if (Math.Abs(_position.X - leftBorder) < Math.Abs(_position.X - rightBorder))
+                    {
+                        if (_position.X <= leftBorder) state = State.Null;
+                        return NewPosition(_position, new Vector2f(leftBorder - 20, topBorder - 10) - _position, _deltaTime);
+                    }
+                    else
+                    {
+                        if (_position.X >= rightBorder) state = State.Null;
+                        return NewPosition(_position, new Vector2f(rightBorder + 20, topBorder - 10) - _position, _deltaTime);
+                    }
 
                 default:
-                    return _position;
+                    return new Vector2f(250,250);
             }
         }
     }
