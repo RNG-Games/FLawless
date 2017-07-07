@@ -1,10 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MoveLibrary
 {
@@ -12,7 +7,7 @@ namespace MoveLibrary
     /// Small Program to complete Compilation
     /// because I havn't found a way to do this in VS
     /// </summary>
-    class Program
+    public class Program
     {
         /// <summary>
         /// Move the Libraries to good locations
@@ -22,9 +17,9 @@ namespace MoveLibrary
         /// 0 - Path to application folder
         /// 1 - Architekture
         /// </param>
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            var applicationFolderPath = "";
+            string applicationFolderPath;
             if (args.Length >= 1)
             {
                 applicationFolderPath = args[0];
@@ -35,7 +30,7 @@ namespace MoveLibrary
             }
             Console.WriteLine("Application Folder: " + applicationFolderPath);
 
-            var libraryPath = "";
+            string libraryPath;
             if (args.Length >= 2)
             {
                 switch (args[1])
@@ -45,9 +40,6 @@ namespace MoveLibrary
                         break;
                     case "x86":
                         libraryPath = applicationFolderPath + "lib\\x86\\";
-                        break;
-                    case "AnyCPU":
-                        libraryPath = applicationFolderPath + "lib\\x64\\";
                         break;
                     default:
                         throw new ArgumentException("Cannot identify architecture \"" + args[1] + "\"");
