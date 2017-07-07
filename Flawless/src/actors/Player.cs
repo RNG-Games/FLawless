@@ -99,7 +99,7 @@ namespace _Flawless.actors
         private Vector2f CheckMove(Vector2f move)
         {
             #if DEBUG
-            if (Program.debug)
+            if (Program.Debug)
                 return move;
             #endif
             //TODO: Test

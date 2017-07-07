@@ -18,10 +18,7 @@ namespace _Flawless.gamestates
         {
             _window.Clear(new Color(0,0,0));
             _window.SetMouseCursorVisible(false);
-            //cursor.Scale = new Vector2f(16, 16);
-            //cursor.Position = (Vector2f) Mouse.GetPosition(_window);
             _window.Draw(text);
-            //_window.Draw(cursor);
         }
 
         public override void Update(float _deltaTime)

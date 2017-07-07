@@ -17,7 +17,7 @@ namespace _Flawless
         public static Stack<GameState> States = new Stack<GameState>();
 
         #if DEBUG
-        public static bool debug = false;
+        public static bool Debug;
         #endif
 
         #endregion
@@ -27,9 +27,10 @@ namespace _Flawless
         private static readonly Dictionary<bool, RenderWindow> WindowCache = new Dictionary<bool, RenderWindow>();
         private static bool _isFullscreen;
         private static Clock _clock;
-        private static float deltaTime;
-        private static float gameTime;
-        private static GameState current;
+        private static float _deltaTime;
+        private static float _gameTime;
+        private static GameState _current;
+        private static Text _text;
 
         #endregion
 
@@ -39,11 +40,12 @@ namespace _Flawless
         {
             _isFullscreen = Properties.Settings.Default.fullscreen;
             _clock = new Clock();
-            gameTime = 0f;
+            _gameTime = 0f;
+            _text = new Text("", Resources.GetFont("rabelo.ttf"));
             States.Push(new MenuState());
         }
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Init();
             AttachWindow();
@@ -54,12 +56,12 @@ namespace _Flawless
                 Update();
                 Render();
 
-                if (current.IsFinished)
+                if (_current.IsFinished)
                     States.Pop();
-                if (current.NewState != null)
+                if (_current.NewState != null)
                 {
-                    States.Push(current.NewState);
-                    current.NewState = null;
+                    States.Push(_current.NewState);
+                    _current.NewState = null;
                 }
                 if(States.Count == 0)
                     Window.Close();
@@ -81,17 +83,19 @@ namespace _Flawless
 
         private static void Update()
         {
-            deltaTime = _clock.ElapsedTime.AsSeconds();
-            gameTime += deltaTime;
+            _deltaTime = _clock.ElapsedTime.AsSeconds();
+            _gameTime += _deltaTime;
             _clock.Restart();
-            current = States.Peek();
-            current.Update(deltaTime);
+            _text.DisplayedString = _gameTime / 1000f + "s";
+            _current = States.Peek();
+            _current.Update(_deltaTime);
         }
 
         private static void Render()
         {
             Window.Clear(new Color(100, 149, 237));
-            current.Draw(Window);
+            _current.Draw(Window);
+            Window.Draw(_text);
             Window.SetView(new View(new Vector2f(960, 540), new Vector2f(1920, 1080)));
             Window.Display();
         }
@@ -123,6 +127,8 @@ namespace _Flawless
             Window = WindowCache[_isFullscreen];
             Window.Closed += Window_OnClose;
             Window.KeyPressed += Window_OnKeyPressed;
+            Window.SetKeyRepeatEnabled(false);
+            Window.SetMouseCursorVisible(false);
             Window.SetVerticalSyncEnabled(true);
             Window.SetVisible(true);
             Window.SetActive(true);
@@ -151,7 +157,7 @@ namespace _Flawless
         {
             #if DEBUG
             if (e.Code == Keyboard.Key.J)
-                debug = !debug;
+                Debug = !Debug;
             #endif
 
             if (e.Code == Keyboard.Key.F11)

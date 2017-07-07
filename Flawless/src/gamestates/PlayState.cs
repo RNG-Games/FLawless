@@ -39,10 +39,11 @@ namespace _Flawless.gamestates
                 act.Draw(_window);
             }
 
-            #if DEBUG
-            if(!Program.debug)
-                _window.Draw(overlay);
-            #endif 
+        #if DEBUG
+            if(Program.Debug)
+                return;
+        #endif
+            _window.Draw(overlay);
         }
 
         public override void Update(float _deltaTime)
