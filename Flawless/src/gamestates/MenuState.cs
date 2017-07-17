@@ -195,8 +195,10 @@ namespace _Flawless.gamestates
 	    {
 			switch (item)
 			{
+				#if DEBUG
 				case MenuItems.Teststage:
 					return "Play Teststage";
+				#endif
 				case MenuItems.Play:
 					return "Play";
 				case MenuItems.Exit:
