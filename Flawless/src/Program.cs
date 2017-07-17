@@ -86,7 +86,7 @@ namespace _Flawless
             _deltaTime = _clock.ElapsedTime.AsSeconds();
             _gameTime += _deltaTime;
             _clock.Restart();
-            _text.DisplayedString = _gameTime / 1000f + "s";
+			_text.DisplayedString =$"{_gameTime/60f:0.##} min";
             _current = States.Peek();
             _current.Update(_deltaTime);
         }
@@ -155,6 +155,7 @@ namespace _Flawless
 
         private static void Window_OnKeyPressed(object sender, KeyEventArgs e)
         {
+			_current.KeyPressed(sender, e);
             #if DEBUG
             if (e.Code == Keyboard.Key.J)
                 Debug = !Debug;
