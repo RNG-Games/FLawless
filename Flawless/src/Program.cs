@@ -86,7 +86,7 @@ namespace _Flawless
             _deltaTime = _clock.ElapsedTime.AsSeconds();
             _gameTime += _deltaTime;
             _clock.Restart();
-			_text.DisplayedString =$"{_gameTime/60f:0.##} min";
+			_text.DisplayedString =$"{_gameTime/60f:f2} min";
             _current = States.Peek();
             _current.Update(_deltaTime);
         }

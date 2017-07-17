@@ -31,13 +31,18 @@ namespace _Flawless.gamestates
 	    private float distNext;
 	    private float distText;
 		private const float itemSpeed = 0.5f;
+		private Color highlighColor = new Color(101, 101, 101);
 
 	    public MenuState()
 	    {
 		    text = new Text(){Font = Resources.GetFont("rabelo.ttf")};
 		    text.DisplayedString = "AAA";
 			text.Origin = new Vector2f(text.GetLocalBounds().Width / 2f, text.GetLocalBounds().Height / 2f);
+		    text.OutlineColor = highlighColor;
+		    text.OutlineThickness = 4f;
 			nextText = new Text(){Font = Resources.GetFont("rabelo.ttf")};
+		    nextText.OutlineColor = highlighColor;
+		    nextText.OutlineThickness = 0f;
 			#if DEBUG
 			currentChoice = MenuItems.Teststage;
 			#else
@@ -94,6 +99,7 @@ namespace _Flawless.gamestates
 
 		    if (!moving)
 		    {
+			    text.OutlineThickness = 0f;
 			    nextText.DisplayedString = getText(currentChoice);
 			    nextText.Origin = text.Origin;
 			    nextText.Position = text.Position;
@@ -126,6 +132,7 @@ namespace _Flawless.gamestates
 		    if ((int)textPos.X >= (int)Program.Window.GetView().Center.X &&
 		        (int)nextText.Position.X >= (int)(Program.Window.GetView().Size.X + nextText.Origin.X))
 		    {
+			    text.OutlineThickness = 4f;
 			    itemChanges.Dequeue();
 			    moving = false;
 			    nextDraw = false;
@@ -144,6 +151,7 @@ namespace _Flawless.gamestates
 
 		    if (!moving)
 		    {
+			    text.OutlineThickness = 0f;
 			    nextText.DisplayedString = getText(currentChoice);
 			    nextText.Origin = text.Origin;
 			    nextText.Position = text.Position;
@@ -175,6 +183,7 @@ namespace _Flawless.gamestates
 		    if ((int) textPos.X <= (int) Program.Window.GetView().Center.X &&
 		        (int) nextText.Position.X <= (int) (0 - nextText.Origin.X))
 		    {
+			    text.OutlineThickness = 4f;
 			    itemChanges.Dequeue();
 			    moving = false;
 			    nextDraw = false;
