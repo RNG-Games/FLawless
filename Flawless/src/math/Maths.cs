@@ -57,6 +57,32 @@ namespace _Flawless.math
         {
             return (float) Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
         }
+
+        public static int factorial (int number)
+        {
+            int result = 1;
+            for (int i = number; i > 1; i--) result *= number;
+            return result;
+        }
+
+        public static int binomial (int n, int k)
+        {
+            return factorial(n) / (factorial(k) * factorial(n-k));
+        }
+
+        public static Vector2f bezier(float t, List<Vector2f> points)
+        {
+            if (t < 0 || t > 1) { return new Vector2f(0, 0); }
+            int n = points.Count - 1;
+            Vector2f result = new Vector2f(0, 0);
+            for (int i = 0; i <= n; i++)
+            {
+                float factor = binomial(n, i) * (float) Math.Pow(t, i) * (float) Math.Pow(1 - t, n - i);
+                result.X += factor * points.ElementAt(i).X;
+                result.Y += factor * points.ElementAt(i).Y;
+            }
+            return result;
+        }
     }
 }
 
