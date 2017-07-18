@@ -58,14 +58,17 @@ namespace _Flawless.math
             return (float) Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
         }
 
-        public static int factorial (int number)
-        {
-            int result = 1;
-            for (int i = number; i > 1; i--) result *= number;
-            return result;
-        }
+	    public static List<int> factorials = new List<int>() { 1, 1, 2, 6 };
 
-        public static int binomial (int n, int k)
+	    public static int factorial(int number)
+	    {
+		    if (factorials.Count - 1 >= number)
+			    return factorials[number];
+		    factorials.Insert(number, number * factorial(number - 1));
+		    return factorials[number];
+	    }
+
+		public static int binomial (int n, int k)
         {
             return factorial(n) / (factorial(k) * factorial(n-k));
         }
